@@ -1,7 +1,7 @@
 import pyaudio
 import wave
 
-CHUNK = 1024
+CHUNK = 4096
 FORMAT = pyaudio.paInt16
 RATE = 44100  # 샘플 레이트를 44100으로 조정
 
