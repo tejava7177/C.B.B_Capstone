@@ -1,15 +1,17 @@
 import numpy as np
 import pyaudio
 
-# 주파수와 음계 매핑
+# 베이스 주파수와 음계 매핑
 NOTE_FREQUENCIES = {
-    "E2": 86.13,
-    "A2": 107.67,
-    "D3": 150.73,
-    "G3": 190.80,
-    "B3": 246.94,
-    "E4": 329.63,
+    "C": 129.20,
+    "D": 150.73,
+    "E": 86.13,
+    "F": 86.13,
+    "G": 96.90,
+    "A": 107.67,
+    "B": 118.43,
 }
+
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2  # 스테레오
@@ -45,34 +47,35 @@ def get_closest_note_and_status(frequency):
     return closest_note, status
 
 
-def measure_background_noise(stream, duration=1):
+def list_audio_devices(p):
     """
-    배경 노이즈 수준을 측정
+    사용 가능한 오디오 입력 장치를 나열
     """
-    print("Measuring background noise...")
-    total_amplitude = 0
-    sample_count = int(RATE / CHUNK * duration)
-
-    for _ in range(sample_count):
-        data = np.frombuffer(stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
-        total_amplitude += np.max(np.abs(data))
-
-    background_noise_level = total_amplitude / sample_count
-    print(f"Background noise level: {background_noise_level:.2f}")
-    return background_noise_level
-
-
-def tuner():
-    """기타 튜너 기능"""
-    p = pyaudio.PyAudio()
-
-    # 오디오 장치 나열
+    print("사용 가능한 오디오 입력 장치:")
     for i in range(p.get_device_count()):
         dev = p.get_device_info_by_index(i)
-        print(f"Device ID {i}: {dev['name']}, Max Input Channels: {dev['maxInputChannels']}")
+        if dev["maxInputChannels"] > 0:
+            print(f"Device ID {i}: {dev['name']}, Max Input Channels: {dev['maxInputChannels']}")
 
-    # 사용자 입력으로 장치 선택
-    device_id = int(input("Enter the device ID to use: "))
+
+def read_simple_chord():
+    """
+    간단한 코드 읽기 및 감지
+    """
+    p = pyaudio.PyAudio()
+
+    # 오디오 장치 나열 및 선택
+    list_audio_devices(p)
+    while True:
+        try:
+            device_id = int(input("사용할 장치의 Device ID를 입력하세요: "))
+            dev = p.get_device_info_by_index(device_id)
+            if dev["maxInputChannels"] > 0:
+                break
+            else:
+                print("유효하지 않은 장치입니다. 입력 채널이 있는 장치를 선택하세요.")
+        except (ValueError, IOError):
+            print("올바른 Device ID를 입력하세요.")
 
     # 스트림 열기
     stream = p.open(format=FORMAT,
@@ -82,40 +85,30 @@ def tuner():
                     input_device_index=device_id,
                     frames_per_buffer=CHUNK)
 
-    # 배경 노이즈 측정
-    background_noise_level = measure_background_noise(stream)
-    effective_threshold = background_noise_level * 2.0  # 민감도를 배경 노이즈의 2배로 설정
-
-    print("Play a note on your guitar. Press Ctrl+C to stop.")
+    print("음을 연주하세요. (Ctrl+C로 종료)")
 
     previous_frequencies = []
     try:
         while True:
+            # 오디오 데이터 읽기
             data = np.frombuffer(stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
 
             # 스테레오 데이터를 모노로 변환
             mono_data = np.mean(data.reshape(-1, 2), axis=1).astype(np.int16)
-
-            # 신호 진폭 계산
-            amplitude = np.max(np.abs(mono_data))
-            if amplitude < effective_threshold:  # 노이즈 필터링
-                #print("유효한 입력 신호가 없습니다.")
-                previous_frequencies.clear()  # 이전 상태 초기화
-                continue
 
             # FFT 수행
             fft = np.fft.fft(mono_data)
             freqs = np.fft.fftfreq(len(fft), 1 / RATE)
             magnitudes = np.abs(fft)
 
-            # 주요 주파수 계산
+            # 양수 주파수만 사용
             positive_freqs = freqs[:len(freqs)//2]
             positive_magnitudes = magnitudes[:len(magnitudes)//2]
+
+            # 주요 주파수 계산
             peak_freq = positive_freqs[np.argmax(positive_magnitudes)]
 
-            if not (80 <= peak_freq <= 1000):  # 기타 주파수 범위만
-                #print("유효한 신호가 없습니다.")
-                previous_frequencies.clear()
+            if not (80 <= peak_freq <= 1000):  # 유효한 주파수 범위
                 continue
 
             # 연속 주파수 감지
@@ -125,11 +118,11 @@ def tuner():
 
             if len(set(map(lambda x: round(x, 1), previous_frequencies))) == 1:  # 3번 연속 동일 주파수
                 note, status = get_closest_note_and_status(peak_freq)
-                print(f"Detected Frequency: {peak_freq:.2f} Hz, Closest Note: {note}, Status: {status}")
+                print(f"Detected Frequency: {peak_freq:.2f} Hz, Closest Note: {note}입니다")
                 previous_frequencies.clear()  # 상태 출력 후 초기화
 
     except KeyboardInterrupt:
-        print("Stopped tuner.")
+        print("프로그램을 종료합니다.")
     finally:
         stream.stop_stream()
         stream.close()
@@ -137,4 +130,4 @@ def tuner():
 
 
 if __name__ == "__main__":
-    tuner()
+    read_simple_chord()
