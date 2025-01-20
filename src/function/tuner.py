@@ -3,10 +3,10 @@ import pyaudio
 
 # 주파수와 음계 매핑
 NOTE_FREQUENCIES = {
-    "E2": 82.41,
-    "A2": 110.00,
-    "D3": 146.83,
-    "G3": 196.00,
+    "E2": 86.13,
+    "A2": 107.67,
+    "D3": 150.73,
+    "G3": 190.80,
     "B3": 246.94,
     "E4": 329.63,
 }
@@ -33,9 +33,9 @@ def get_closest_note_and_status(frequency):
             min_difference = difference
 
     if closest_freq:
-        if frequency < closest_freq - 1:
+        if frequency < closest_freq - 2:
             status = "음이 낮습니다."
-        elif frequency > closest_freq + 1:
+        elif frequency > closest_freq + 2:
             status = "음이 높습니다."
         else:
             status = "적절합니다."
@@ -84,7 +84,7 @@ def tuner():
 
     # 배경 노이즈 측정
     background_noise_level = measure_background_noise(stream)
-    effective_threshold = background_noise_level * 2.5  # 민감도를 배경 노이즈의 2배로 설정
+    effective_threshold = background_noise_level * 2.0  # 민감도를 배경 노이즈의 2배로 설정
 
     print("Play a note on your guitar. Press Ctrl+C to stop.")
 

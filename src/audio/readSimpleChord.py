@@ -1,89 +1,133 @@
-import librosa
 import numpy as np
-import matplotlib.pyplot as plt
+import pyaudio
+
+# 베이스 주파수와 음계 매핑
+NOTE_FREQUENCIES = {
+    "C": 129.20,
+    "D": 150.73,
+    "E": 86.13,
+    "F": 86.13,
+    "G": 96.90,
+    "A": 107.67,
+    "B": 118.43,
+}
 
 
-# 1. 오디오 파일 로드
-def load_audio(file_path):
+FORMAT = pyaudio.paInt16
+CHANNELS = 2  # 스테레오
+RATE = 44100
+CHUNK = 4096
+
+
+def get_closest_note_and_status(frequency):
     """
-    오디오 파일을 로드하여 샘플 데이터와 샘플링 레이트를 반환.
-
-    Args:
-        file_path (str): 분석할 오디오 파일 경로
-
-    Returns:
-        y (np.ndarray): 오디오 신호 데이터
-        sr (int): 샘플링 레이트
+    주어진 주파수에서 가장 가까운 음계와 상태를 계산
     """
-    y, sr = librosa.load(file_path, sr=None)
-    return y, sr
+    closest_note = None
+    closest_freq = None
+    min_difference = float('inf')
+
+    for note, freq in NOTE_FREQUENCIES.items():
+        difference = abs(frequency - freq)
+        if difference < min_difference:
+            closest_note = note
+            closest_freq = freq
+            min_difference = difference
+
+    if closest_freq:
+        if frequency < closest_freq - 2:
+            status = "음이 낮습니다."
+        elif frequency > closest_freq + 2:
+            status = "음이 높습니다."
+        else:
+            status = "적절합니다."
+    else:
+        status = "알 수 없는 음입니다."
+
+    return closest_note, status
 
 
-# 2. 피치 추출
-def extract_pitch(y, sr):
+def list_audio_devices(p):
     """
-    오디오 데이터에서 피치를 추출.
-
-    Args:
-        y (np.ndarray): 오디오 신호 데이터
-        sr (int): 샘플링 레이트
-
-    Returns:
-        f0 (np.ndarray): 기본 주파수 배열 (Hz)
+    사용 가능한 오디오 입력 장치를 나열
     """
-    f0, _, _ = librosa.pyin(
-        y, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C7')
-    )
-    return f0
+    print("사용 가능한 오디오 입력 장치:")
+    for i in range(p.get_device_count()):
+        dev = p.get_device_info_by_index(i)
+        if dev["maxInputChannels"] > 0:
+            print(f"Device ID {i}: {dev['name']}, Max Input Channels: {dev['maxInputChannels']}")
 
 
-# 3. 주파수를 노트로 변환
-def frequency_to_notes(f0):
+def read_simple_chord():
     """
-    주파수를 음악 노트로 변환.
-
-    Args:
-        f0 (np.ndarray): 기본 주파수 배열 (Hz)
-
-    Returns:
-        notes (list): 감지된 노트의 리스트
+    간단한 코드 읽기 및 감지
     """
+    p = pyaudio.PyAudio()
 
-    def hz_to_note_name(freq):
-        return librosa.hz_to_note(freq) if freq and not np.isnan(freq) else None
+    # 오디오 장치 나열 및 선택
+    list_audio_devices(p)
+    while True:
+        try:
+            device_id = int(input("사용할 장치의 Device ID를 입력하세요: "))
+            dev = p.get_device_info_by_index(device_id)
+            if dev["maxInputChannels"] > 0:
+                break
+            else:
+                print("유효하지 않은 장치입니다. 입력 채널이 있는 장치를 선택하세요.")
+        except (ValueError, IOError):
+            print("올바른 Device ID를 입력하세요.")
 
-    notes = [hz_to_note_name(freq) for freq in f0 if freq and not np.isnan(freq)]
-    return notes
+    # 스트림 열기
+    stream = p.open(format=FORMAT,
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    input_device_index=device_id,
+                    frames_per_buffer=CHUNK)
 
+    print("음을 연주하세요. (Ctrl+C로 종료)")
 
-# 4. 메인 실행
-def main():
-    file_path = 'e.wav'  # 분석할 WAV 파일 경로
-    print(f"Analyzing audio file: {file_path}")
+    previous_frequencies = []
+    try:
+        while True:
+            # 오디오 데이터 읽기
+            data = np.frombuffer(stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
 
-    # 1. 오디오 파일 로드
-    y, sr = load_audio(file_path)
+            # 스테레오 데이터를 모노로 변환
+            mono_data = np.mean(data.reshape(-1, 2), axis=1).astype(np.int16)
 
-    # 2. 피치 추출
-    f0 = extract_pitch(y, sr)
+            # FFT 수행
+            fft = np.fft.fft(mono_data)
+            freqs = np.fft.fftfreq(len(fft), 1 / RATE)
+            magnitudes = np.abs(fft)
 
-    # 3. 노트 변환
-    notes = frequency_to_notes(f0)
+            # 양수 주파수만 사용
+            positive_freqs = freqs[:len(freqs)//2]
+            positive_magnitudes = magnitudes[:len(magnitudes)//2]
 
-    # 결과 출력
-    print("\nDetected Notes:")
-    for idx, note in enumerate(notes):
-        print(f"{idx + 1}. {note}")
+            # 주요 주파수 계산
+            peak_freq = positive_freqs[np.argmax(positive_magnitudes)]
 
-    # 사용자 입력 방식 (확장 가능)
-    # print("\n사용자 입력 테스트:")
-    # user_notes = []
-    # for i in range(3):  # 최대 3개의 노트를 입력받음
-    #     user_note = input(f"{i + 1}번째 노트를 입력해주세요: ")
-    #     user_notes.append(user_note)
-    #
-    # print("\n사용자 입력 노트:", user_notes)
+            if not (80 <= peak_freq <= 1000):  # 유효한 주파수 범위
+                continue
+
+            # 연속 주파수 감지
+            previous_frequencies.append(peak_freq)
+            if len(previous_frequencies) > 3:
+                previous_frequencies.pop(0)
+
+            if len(set(map(lambda x: round(x, 1), previous_frequencies))) == 1:  # 3번 연속 동일 주파수
+                note, status = get_closest_note_and_status(peak_freq)
+                print(f"Detected Frequency: {peak_freq:.2f} Hz, Closest Note: {note}입니다")
+                previous_frequencies.clear()  # 상태 출력 후 초기화
+
+    except KeyboardInterrupt:
+        print("프로그램을 종료합니다.")
+    finally:
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
 
 
 if __name__ == "__main__":
-    main()
+    read_simple_chord()
