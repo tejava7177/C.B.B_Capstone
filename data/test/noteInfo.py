@@ -11,6 +11,7 @@ def program_to_instrument_name(program_number):
     return pretty_midi.program_to_instrument_name(program_number)
 
 
+
 # 노트 정보 출력
 for instrument in midi_data.instruments:
     # 악기 이름 출력
@@ -21,4 +22,3 @@ for instrument in midi_data.instruments:
     for note in instrument.notes:
         note_name = pretty_midi.note_number_to_name(note.pitch)
         print(f"Note: {note_name}, Start: {note.start:.2f}, End: {note.end:.2f}, Duration: {note.end - note.start:.2f}")
-        
