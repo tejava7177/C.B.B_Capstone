@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c48a0d4-6ad5-4c1d-9f9a-fd190bd78a76" name="Changes" comment="[feat]ReadSimpleChord">
+    <list default="true" id="2c48a0d4-6ad5-4c1d-9f9a-fd190bd78a76" name="Changes" comment="[feat]ReadSimpleChord - 코드 읽기&#10;- F 코드를 정확히 읽지 못하는 오류">
+      <change afterPath="$PROJECT_DIR$/data/test/datasetCount.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/test/noteInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/audio/readSimpleChord.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/audio/readSimpleChord.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/function/tuner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/function/tuner.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,32 +45,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.analyzer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.readSimpleChord.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recorder.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_visualizer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tuner.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;readSimpleChord&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.analyzer.executor": "Run",
+    "Python.datasetCount.executor": "Run",
+    "Python.noteInfo.executor": "Run",
+    "Python.readSimpleChord.executor": "Run",
+    "Python.recorder.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test_visualizer.executor": "Run",
+    "Python.tuner.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tuner">
-    <configuration name="analyzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.noteInfo">
+    <configuration name="datasetCount" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="C.B.B" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,12 +81,35 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/audio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/audio/analyzer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/test/datasetCount.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="noteInfo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="C.B.B" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/test/noteInfo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,29 +164,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="C.B.B" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/function" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/function/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="tuner" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="C.B.B" />
       <option name="ENV_FILES" value="" />
@@ -187,11 +189,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tuner" />
+        <item itemvalue="Python.noteInfo" />
+        <item itemvalue="Python.datasetCount" />
         <item itemvalue="Python.readSimpleChord" />
+        <item itemvalue="Python.tuner" />
         <item itemvalue="Python.recorder" />
-        <item itemvalue="Python.analyzer" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +219,8 @@
       <workItem from="1737168326562" duration="1248000" />
       <workItem from="1737198603766" duration="4082000" />
       <workItem from="1737255178126" duration="1324000" />
-      <workItem from="1737280399610" duration="9080000" />
+      <workItem from="1737280399610" duration="9510000" />
+      <workItem from="1737538734631" duration="1000000" />
     </task>
     <task id="LOCAL-00001" summary="기본 라이브러리 설치 및 디렉토리 구조 설정">
       <option name="closed" value="true" />
@@ -251,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737280626230</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[feat]ReadSimpleChord - 코드 읽기&#10;- F 코드를 정확히 읽지 못하는 오류">
+      <option name="closed" value="true" />
+      <created>1737355174466</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737355174466</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,14 +284,17 @@
     <MESSAGE value="[feat] 소리 데이터 입력 및 녹음 -&gt; 녹음파일 생성" />
     <MESSAGE value="[refactor] 코드 위치 수정" />
     <MESSAGE value="[feat]ReadSimpleChord" />
-    <option name="LAST_COMMIT_MESSAGE" value="[feat]ReadSimpleChord" />
+    <MESSAGE value="[feat]ReadSimpleChord - 코드 읽기&#10;- F 코드를 정확히 읽지 못하는 오류" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat]ReadSimpleChord - 코드 읽기&#10;- F 코드를 정확히 읽지 못하는 오류" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/C_B_B$tuner.coverage" NAME="tuner Coverage Results" MODIFIED="1737354264419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/function" />
+    <SUITE FILE_PATH="coverage/C_B_B$noteInfo.coverage" NAME="noteInfo Coverage Results" MODIFIED="1737539384194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
+    <SUITE FILE_PATH="coverage/C_B_B$datasetCount.coverage" NAME="datasetCount Coverage Results" MODIFIED="1737538989874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
     <SUITE FILE_PATH="coverage/C_B_B$test_visualizer.coverage" NAME="test_visualizer Coverage Results" MODIFIED="1737090280049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/C_B_B$analyzer.coverage" NAME="analyzer Coverage Results" MODIFIED="1737255857052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
     <SUITE FILE_PATH="coverage/C_B_B$recorder.coverage" NAME="recorder Coverage Results" MODIFIED="1737350585625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
-    <SUITE FILE_PATH="coverage/C_B_B$readSimpleChord.coverage" NAME="readSimpleChord Coverage Results" MODIFIED="1737354161444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
+    <SUITE FILE_PATH="coverage/C_B_B$readSimpleChord.coverage" NAME="readSimpleChord Coverage Results" MODIFIED="1737538894507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
     <SUITE FILE_PATH="coverage/C_B_B$test.coverage" NAME="test Coverage Results" MODIFIED="1737200525983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/function" />
   </component>
 </project>
