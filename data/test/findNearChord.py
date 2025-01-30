@@ -1,7 +1,6 @@
 import pretty_midi
 from collections import defaultdict
 
-# MIDI 노트를 코드 이름으로 매핑
 # MIDI 노트를 코드 이름으로 매핑 (0~11 범위)
 CHORD_MAP = {
     # Major Triads (메이저 코드)
@@ -39,60 +38,36 @@ CHORD_MAP = {
     (7, 11, 2, 6): "Gmaj7",
     (9, 1, 4, 8): "Amaj7",
     (11, 3, 6, 10): "Bmaj7",
-
-    # Minor 7th Chords (마이너 7 코드)
-    (0, 3, 7, 10): "Cm7",
-    (2, 5, 9, 12): "Dm7",
-    (4, 7, 11, 14): "Em7",
-    (5, 8, 0, 3): "Fm7",
-    (7, 10, 2, 5): "Gm7",
-    (9, 0, 3, 7): "Am7",
-    (11, 2, 5, 9): "Bm7",
-
-    # Suspended Chords (서스펜디드 코드)
-    (0, 5, 7): "Csus4",
-    (2, 7, 9): "Dsus4",
-    (4, 9, 11): "Esus4",
-    (5, 0, 2): "Fsus4",
-    (7, 2, 4): "Gsus4",
-    (9, 4, 6): "Asus4",
-    (11, 6, 8): "Bsus4",
-
-    # Add9 Chords (Add9 코드)
-    (0, 4, 7, 14): "Cadd9",
-    (2, 6, 9, 16): "Dadd9",
-    (4, 8, 11, 18): "Eadd9",
-    (5, 9, 0, 19): "Fadd9",
-    (7, 11, 2, 21): "Gadd9",
-    (9, 1, 4, 23): "Aadd9",
-    (11, 3, 6, 25): "Badd9",
-
-    # Diminished Chords (디미니쉬 코드)
-    (0, 3, 6): "Cdim",
-    (2, 5, 8): "Ddim",
-    (4, 7, 10): "Edim",
-    (5, 8, 11): "Fdim",
-    (7, 10, 1): "Gdim",
-    (9, 0, 3): "Adim",
-    (11, 2, 5): "Bdim",
-
-    # Augmented Chords (어그먼트 코드)
-    (0, 4, 8): "Caug",
-    (2, 6, 10): "Daug",
-    (4, 8, 0): "Eaug",
-    (5, 9, 1): "Faug",
-    (7, 11, 3): "Gaug",
-    (9, 1, 5): "Aaug",
-    (11, 3, 7): "Baug"
 }
+
 
 def get_chord_name(notes):
     """노트 리스트를 코드 이름으로 변환"""
     normalized_notes = sorted(set(note % 12 for note in notes))  # 음높이 정규화 (0~11)
+
     for chord_notes, chord_name in CHORD_MAP.items():
         if all(note in normalized_notes for note in chord_notes):
             return chord_name
+
     return f"Unknown({normalized_notes})"  # 매핑되지 않은 코드
+
+
+def get_closest_chord(notes):
+    """Unknown 코드일 경우, 가장 유사한 코드 찾기"""
+    normalized_notes = sorted(set(note % 12 for note in notes))  # 음높이 정규화
+    best_match = None
+    best_match_score = 0
+
+    for chord_notes, chord_name in CHORD_MAP.items():
+        chord_notes_set = set(chord_notes)
+        matched_notes = len(chord_notes_set.intersection(normalized_notes))  # 매칭된 노트 개수
+
+        if matched_notes > best_match_score:
+            best_match = chord_name
+            best_match_score = matched_notes
+
+    return best_match if best_match else None
+
 
 def midi_to_chords(midi_file, threshold=0.05):
     """MIDI 파일에서 코드를 추출"""
@@ -109,9 +84,17 @@ def midi_to_chords(midi_file, threshold=0.05):
     for time, notes in sorted(time_notes.items()):
         if len(notes) > 2:  # 코드로 해석 가능한 노트만 처리
             chord_name = get_chord_name(notes)
+
+            # Unknown 코드일 경우, 가장 가까운 코드 추천
+            if "Unknown" in chord_name:
+                closest_chord = get_closest_chord(notes)
+                if closest_chord:
+                    chord_name = f"{chord_name} (Maybe: {closest_chord})"
+
             chords.append((time, chord_name))
 
     return chords
+
 
 # MIDI 파일에서 코드 추출
 midi_file_path = '/Volumes/Extreme SSD/lmd_aligned/O/F/F/TROFFYZ128F429262A/279ab4352b18622af04183c069537e4e.mid'
