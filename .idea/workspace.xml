@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c48a0d4-6ad5-4c1d-9f9a-fd190bd78a76" name="Changes" comment="[fix] test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/function/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/function/test.py" afterDir="false" />
-    </list>
+    <list default="true" id="2c48a0d4-6ad5-4c1d-9f9a-fd190bd78a76" name="Changes" comment="[fix] test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,7 +230,7 @@
       <workItem from="1737781948856" duration="699000" />
       <workItem from="1738217787885" duration="3278000" />
       <workItem from="1738417444839" duration="304000" />
-      <workItem from="1738932321745" duration="350000" />
+      <workItem from="1738932321745" duration="396000" />
     </task>
     <task id="LOCAL-00001" summary="기본 라이브러리 설치 및 디렉토리 구조 설정">
       <option name="closed" value="true" />
