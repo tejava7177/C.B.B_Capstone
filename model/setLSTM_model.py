@@ -54,4 +54,7 @@ history = model.fit(X, Y, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_split
 # 모델 저장
 model.save("lstm_chord_model.h5")
 
+#.keras 모델을 사용할 수도 있음.
+# model.save("lstm_chord_model.keras")
+
 print("✅ LSTM 모델 학습 완료 및 저장 완료!")
