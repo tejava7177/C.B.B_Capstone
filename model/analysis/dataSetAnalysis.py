@@ -93,7 +93,7 @@ def process_all_midi_files(dataset_path, max_files=5000):
 midi_chord_data = process_all_midi_files(MIDI_DATASET_PATH, max_files=5000)
 
 # 데이터 저장
-output_json_path = "midi_chord_data.json"
+output_json_path = "../dataset/midi_chord_data.json"
 with open(output_json_path, "w") as f:
     json.dump(midi_chord_data, f, indent=4)
 

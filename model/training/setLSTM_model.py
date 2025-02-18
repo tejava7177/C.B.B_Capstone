@@ -5,8 +5,8 @@ from tensorflow.keras.layers import LSTM, Dense, Embedding
 from tensorflow.keras.utils import to_categorical
 
 # 데이터 로드
-chord_sequences = np.load("chord_sequences.npy")
-chord_to_index = np.load("chord_to_index.npy", allow_pickle=True).item()
+chord_sequences = np.load("../dataset/chord_sequences.npy")
+chord_to_index = np.load("../dataset/chord_to_index.npy", allow_pickle=True).item()
 index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
 
 # 하이퍼파라미터 설정

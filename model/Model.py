@@ -2,14 +2,15 @@ import numpy as np
 import tensorflow as tf
 
 # 저장된 모델 로드
-MODEL_PATH = "lstm_chord_model.h5"  # 또는 "lstm_chord_model.h5"
+MODEL_PATH = "training/lstm_chord_model.h5"  # 또는 "lstm_chord_model.h5"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # 코드 매핑 로드
-chord_to_index = np.load("chord_to_index.npy", allow_pickle=True).item()
+chord_to_index = np.load("dataset/chord_to_index.npy", allow_pickle=True).item()
 index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
 
 # 시퀀스 길이
+
 SEQUENCE_LENGTH = 3
 
 def sample_with_temperature(predictions, temperature=1.5):
@@ -35,7 +36,7 @@ def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.
     return generated_chords
 
 # 예제 코드 진행 (C Major → G Major → A Minor)
-seed_sequence = [chord_to_index["C Major"], chord_to_index["G Major"], chord_to_index["A Minor"]]
+seed_sequence = [chord_to_index["E Major"], chord_to_index["C Major"], chord_to_index["A Minor"]]
 
 # Temperature=1.2로 설정하여 랜덤성 증가
 predicted_chords = predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.2)
