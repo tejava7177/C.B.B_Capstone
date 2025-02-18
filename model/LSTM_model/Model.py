@@ -2,11 +2,11 @@ import numpy as np
 import tensorflow as tf
 
 # 저장된 모델 로드
-MODEL_PATH = "training/lstm_chord_model.h5"  # 또는 "lstm_chord_model.h5"
+MODEL_PATH = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/training/lstm_chord_model.h5"  # 또는 "lstm_chord_model.h5"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # 코드 매핑 로드
-chord_to_index = np.load("dataset/chord_to_index.npy", allow_pickle=True).item()
+chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy", allow_pickle=True).item()
 index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
 
 # 시퀀스 길이

@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c48a0d4-6ad5-4c1d-9f9a-fd190bd78a76" name="Changes" comment="[fix] test">
+      <change afterPath="$PROJECT_DIR$/model/LSTM_model/Model2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/analysis/addChords.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/analysis/checkChord.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/check_npyFiles/check_chordSeq.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/check_npyFiles/check_chordSeq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/check_npyFiles/check_codeIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/check_npyFiles/check_codeIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/chord_sequences.npy" beforeDir="false" afterPath="$PROJECT_DIR$/model/dataset/chord_sequences.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/chord_to_index.npy" beforeDir="false" afterPath="$PROJECT_DIR$/model/dataset/chord_to_index.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/convertToNum.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/dataset/convertToNum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/dataSetAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/analysis/dataSetAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/lstm_chord_model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/model/training/lstm_chord_model.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/midi_chord_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/dataset/midi_chord_data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/readyToDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/dataset/readyToDataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/setLSTM_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/training/setLSTM_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/testModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/LSTM_model/Model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,51 +47,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.analyze_BassandGuitarChord.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analyze_bassChord.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analyzer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chech_chordSeq.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_chordSeq.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_codeIndex.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chordInfo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convertToNum.executor&quot;: &quot;Run&quot;,
-    &quot;Python.createNewSound.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataSetAnalysis.executor&quot;: &quot;Run&quot;,
-    &quot;Python.datasetCount.executor&quot;: &quot;Run&quot;,
-    &quot;Python.findNearChord.executor&quot;: &quot;Run&quot;,
-    &quot;Python.noteInfo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.readSimpleChord.executor&quot;: &quot;Run&quot;,
-    &quot;Python.readyToDataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recorder.executor&quot;: &quot;Run&quot;,
-    &quot;Python.setLSTM_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testModel.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testVersion.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_visualizer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tuner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.usedInstrument.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Model2.executor": "Run",
+    "Python.analyze_BassandGuitarChord.executor": "Run",
+    "Python.analyze_bassChord.executor": "Run",
+    "Python.analyzer.executor": "Run",
+    "Python.chech_chordSeq.executor": "Run",
+    "Python.checkChord.executor": "Run",
+    "Python.check_chordSeq.executor": "Run",
+    "Python.check_codeIndex.executor": "Run",
+    "Python.chordInfo.executor": "Run",
+    "Python.convertToNum.executor": "Run",
+    "Python.createNewSound.executor": "Run",
+    "Python.dataSetAnalysis.executor": "Run",
+    "Python.datasetCount.executor": "Run",
+    "Python.findNearChord.executor": "Run",
+    "Python.noteInfo.executor": "Run",
+    "Python.readSimpleChord.executor": "Run",
+    "Python.readyToDataset.executor": "Run",
+    "Python.recorder.executor": "Run",
+    "Python.setLSTM_model.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.testModel.executor": "Run",
+    "Python.testVersion.executor": "Run",
+    "Python.test_visualizer.executor": "Run",
+    "Python.tuner.executor": "Run",
+    "Python.usedInstrument.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/model/LSTM_model" />
+      <recent name="$PROJECT_DIR$/model/dataset" />
+      <recent name="$PROJECT_DIR$/model/training" />
+      <recent name="$PROJECT_DIR$/model/analysis" />
       <recent name="$PROJECT_DIR$/model/check_npyFiles" />
-      <recent name="$PROJECT_DIR$/model" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.testModel">
+  <component name="RunManager" selected="Python.checkChord">
     <configuration name="Model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="C.B.B" />
       <option name="ENV_FILES" value="" />
@@ -113,7 +110,76 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/Model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/LSTM_model/Model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Model2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="C.B.B" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model/LSTM_model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/LSTM_model/Model2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="addChords" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="C.B.B" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/analysis/addChords.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="checkChord" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="C.B.B" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/analysis/checkChord.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -145,82 +211,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="check_codeIndex" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="C.B.B" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model/check_npyFiles" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/check_npyFiles/check_codeIndex.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="readyToDataset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="C.B.B" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/dataset/readyToDataset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="setLSTM_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="C.B.B" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/training/setLSTM_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.checkChord" />
+        <item itemvalue="Python.addChords" />
+        <item itemvalue="Python.Model2" />
         <item itemvalue="Python.testModel" />
         <item itemvalue="Python.check_chordSeq" />
-        <item itemvalue="Python.setLSTM_model" />
-        <item itemvalue="Python.readyToDataset" />
-        <item itemvalue="Python.check_codeIndex" />
       </list>
     </recent_temporary>
   </component>
@@ -255,7 +252,7 @@
       <workItem from="1738417444839" duration="304000" />
       <workItem from="1738932321745" duration="396000" />
       <workItem from="1739776300410" duration="4088000" />
-      <workItem from="1739856368367" duration="1690000" />
+      <workItem from="1739856368367" duration="2988000" />
     </task>
     <task id="LOCAL-00001" summary="기본 라이브러리 설치 및 디렉토리 구조 설정">
       <option name="closed" value="true" />
@@ -340,27 +337,29 @@
     <option name="LAST_COMMIT_MESSAGE" value="[fix] test" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/C_B_B$createNewSound.coverage" NAME="createNewSound Coverage Results" MODIFIED="1738218166183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/samples" />
     <SUITE FILE_PATH="coverage/C_B_B$usedInstrument.coverage" NAME="usedInstrument Coverage Results" MODIFIED="1738220687286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
     <SUITE FILE_PATH="coverage/C_B_B$convertToNum.coverage" NAME="convertToNum Coverage Results" MODIFIED="1739778492675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
-    <SUITE FILE_PATH="coverage/C_B_B$noteInfo.coverage" NAME="noteInfo Coverage Results" MODIFIED="1738218563839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
     <SUITE FILE_PATH="coverage/C_B_B$datasetCount.coverage" NAME="datasetCount Coverage Results" MODIFIED="1738218173360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
-    <SUITE FILE_PATH="coverage/C_B_B$testVersion.coverage" NAME="testVersion Coverage Results" MODIFIED="1737782553611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/C_B_B$check_codeIndex.coverage" NAME="check_codeIndex Coverage Results" MODIFIED="1739778611295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model/check_npyFiles" />
-    <SUITE FILE_PATH="coverage/C_B_B$chordInfo.coverage" NAME="chordInfo Coverage Results" MODIFIED="1739776428324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
-    <SUITE FILE_PATH="coverage/C_B_B$dataSetAnalysis.coverage" NAME="dataSetAnalysis Coverage Results" MODIFIED="1739777483861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
     <SUITE FILE_PATH="coverage/C_B_B$readSimpleChord.coverage" NAME="readSimpleChord Coverage Results" MODIFIED="1737538894507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
     <SUITE FILE_PATH="coverage/C_B_B$test.coverage" NAME="test Coverage Results" MODIFIED="1739777983512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/function" />
-    <SUITE FILE_PATH="coverage/C_B_B$setLSTM_model.coverage" NAME="setLSTM_model Coverage Results" MODIFIED="1739779946060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
-    <SUITE FILE_PATH="coverage/C_B_B$analyze_BassandGuitarChord.coverage" NAME="analyze_BassandGuitarChord Coverage Results" MODIFIED="1738417526301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
     <SUITE FILE_PATH="coverage/C_B_B$chech_chordSeq.coverage" NAME="check_chordSeq Coverage Results" MODIFIED="1739778652496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model/check_npyFiles" />
-    <SUITE FILE_PATH="coverage/C_B_B$tuner.coverage" NAME="tuner Coverage Results" MODIFIED="1737354264419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/function" />
     <SUITE FILE_PATH="coverage/C_B_B$analyze_bassChord.coverage" NAME="analyze_bassChord Coverage Results" MODIFIED="1738222907390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
     <SUITE FILE_PATH="coverage/C_B_B$check_chordSeq.coverage" NAME="check_chordSeq Coverage Results" MODIFIED="1739858041692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model/check_npyFiles" />
     <SUITE FILE_PATH="coverage/C_B_B$test_visualizer.coverage" NAME="test_visualizer Coverage Results" MODIFIED="1737090280049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/C_B_B$analyzer.coverage" NAME="analyzer Coverage Results" MODIFIED="1737255857052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
-    <SUITE FILE_PATH="coverage/C_B_B$testModel.coverage" NAME="Model Coverage Results" MODIFIED="1739858044558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/C_B_B$testModel.coverage" NAME="Model Coverage Results" MODIFIED="1739859103097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
     <SUITE FILE_PATH="coverage/C_B_B$readyToDataset.coverage" NAME="readyToDataset Coverage Results" MODIFIED="1739779732765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/C_B_B$checkChord.coverage" NAME="checkChord Coverage Results" MODIFIED="1739859335209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model/analysis" />
+    <SUITE FILE_PATH="coverage/C_B_B$createNewSound.coverage" NAME="createNewSound Coverage Results" MODIFIED="1738218166183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/samples" />
+    <SUITE FILE_PATH="coverage/C_B_B$noteInfo.coverage" NAME="noteInfo Coverage Results" MODIFIED="1738218563839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
+    <SUITE FILE_PATH="coverage/C_B_B$testVersion.coverage" NAME="testVersion Coverage Results" MODIFIED="1737782553611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/C_B_B$chordInfo.coverage" NAME="chordInfo Coverage Results" MODIFIED="1739776428324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
+    <SUITE FILE_PATH="coverage/C_B_B$dataSetAnalysis.coverage" NAME="dataSetAnalysis Coverage Results" MODIFIED="1739777483861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/C_B_B$Model2.coverage" NAME="Model2 Coverage Results" MODIFIED="1739859176431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model/LSTM_model" />
+    <SUITE FILE_PATH="coverage/C_B_B$setLSTM_model.coverage" NAME="setLSTM_model Coverage Results" MODIFIED="1739779946060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/C_B_B$analyze_BassandGuitarChord.coverage" NAME="analyze_BassandGuitarChord Coverage Results" MODIFIED="1738417526301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
+    <SUITE FILE_PATH="coverage/C_B_B$tuner.coverage" NAME="tuner Coverage Results" MODIFIED="1737354264419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/function" />
+    <SUITE FILE_PATH="coverage/C_B_B$analyzer.coverage" NAME="analyzer Coverage Results" MODIFIED="1737255857052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
     <SUITE FILE_PATH="coverage/C_B_B$recorder.coverage" NAME="recorder Coverage Results" MODIFIED="1737350585625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/audio" />
     <SUITE FILE_PATH="coverage/C_B_B$findNearChord.coverage" NAME="findNearChord Coverage Results" MODIFIED="1738218518514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/test" />
   </component>
