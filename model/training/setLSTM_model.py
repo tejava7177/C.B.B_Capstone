@@ -52,7 +52,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 history = model.fit(X, Y, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_split=0.1)
 
 # 모델 저장
-model.save("lstm_chord_model.h5")
+model.save("lstm_chord_model2.h5")
 
 #.keras 모델을 사용할 수도 있음.
 # model.save("lstm_chord_model.keras")
