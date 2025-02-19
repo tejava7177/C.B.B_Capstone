@@ -97,7 +97,7 @@ def midi_to_chords(midi_file, threshold=0.05):
 
 
 # MIDI 파일에서 코드 추출
-midi_file_path = '/Volumes/Extreme SSD/lmd_aligned/O/F/F/TROFFYZ128F429262A/279ab4352b18622af04183c069537e4e.mid'
+midi_file_path = '/Volumes/Extreme SSD/lmd_aligned/M/N/O/TRMNOKT128F930E066/f939de5d931efb02350769ac5437e6f5.mid'
 chords = midi_to_chords(midi_file_path)
 
 # 결과 출력
