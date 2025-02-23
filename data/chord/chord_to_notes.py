@@ -65,6 +65,7 @@ CHORD_TO_NOTES = {
     "Csus4": [60, 65, 67],
     "Gsus4": [67, 72, 74],
     "Dsus4": [62, 67, 69],
+    "Bsus4": [47, 52, 54],
 
     # Diminished Chords
     "Cdim": [60, 63, 66],

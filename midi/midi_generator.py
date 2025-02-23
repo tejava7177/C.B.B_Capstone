@@ -42,8 +42,7 @@ ai_generated_chords = ["C9", "G9", "F9", "E7", "G9", "E Major", "G9", "Amaj7",
                        "Cmaj7", "Bsus4", "Dmaj7", "D9", "Amaj7", "Dmaj7", "B7"]
 
 # MIDI 파일 생성 (기본 피아노 + 드럼)
-save_chord_progression_to_midi(ai_generated_chords, bpm=120, filename="ai_generated_chords_full.mid")
+#save_chord_progression_to_midi(ai_generated_chords, bpm=120, filename="ai_generated_chords_full.mid")
 
 # MIDI 파일 생성 (기타 포함)
-save_chord_progression_to_midi(ai_generated_chords, bpm=120, filename="ai_generated_chords_with_guitar.mid",
-                               include_guitar=True)
+save_chord_progression_to_midi(ai_generated_chords, bpm=120, filename="playJam.mid", include_guitar=True)
