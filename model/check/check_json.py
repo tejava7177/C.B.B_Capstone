@@ -1,7 +1,7 @@
 import json
 
 # MIDI 코드 진행 데이터 로드
-with open("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/midi_chord_data.json", "r") as f:
+with open("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/data/chord_melody_data.json", "r") as f:
     midi_chord_data = json.load(f)
 
 # 코드 빈도 분석
