@@ -8,19 +8,20 @@ sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/data/chord")
 from chord_to_notes import CHORD_TO_NOTES
 
 def add_guitar_track(midi, chord_progression, start_time, duration):
-    """ 일렉 기타 리프(Lead Line) 추가 """
+    """🎸 일렉 기타 트랙 추가 (1옥타브 낮게, 멜로디 추가)"""
 
-    guitar = pretty_midi.Instrument(program=29)  # Overdrive Guitar
+    guitar = pretty_midi.Instrument(program=27)  # ✅ Electric Guitar (Clean)
 
     for chord in chord_progression:
+        # ✅ CHORD_TO_NOTES에서 코드 찾기 (없으면 C Major 기본 코드 사용)
         if chord in CHORD_TO_NOTES:
             midi_notes = CHORD_TO_NOTES[chord]
         else:
             print(f"⚠️ Warning: '{chord}' 코드가 CHORD_TO_NOTES에 정의되지 않았음. 기본 코드 사용")
             midi_notes = CHORD_TO_NOTES.get("C Major", [60, 64, 67])
 
-        midi_notes = [int(n) for n in midi_notes]
-        midi_notes = [n - 12 for n in midi_notes]  # 기타 음역으로 변환
+        # ✅ 숫자로 변환 후 1옥타브 낮춤
+        midi_notes = [int(n) - 12 for n in midi_notes]
 
         # 🎸 기본 코드 톤 연주 (다운스트로크)
         for i, note_number in enumerate(midi_notes):
