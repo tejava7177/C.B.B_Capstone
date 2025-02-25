@@ -1,43 +1,53 @@
 import pretty_midi
 import sys
 import os
+from random import choice
 
-# ✅ instruments 폴더 경로 추가
+# ✅ 경로 설정
 sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/instruments")
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/data/scale")
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/test")
 
-# ✅ 각 악기별 트랙 추가 함수 불러오기
+# ✅ 악기별 트랙 불러오기
 from piano import add_piano_track
 from drums import add_drum_track
 from guitar import add_guitar_track
+from generate_melody import generate_melody_from_chords  # ✅ 멜로디 생성 함수 추가
 
-# ✅ MIDI 파일 저장 경로
+# ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/logicFiles"
 
-def save_chord_progression_to_midi(chord_progression, bpm=120, filename="basic_backingTrack.mid"):
-    """AI가 생성한 코드 진행을 MIDI 파일로 변환하고 기본 백킹 트랙 추가"""
+def add_melody_track(midi, melody_data):
+    """멜로디 트랙 추가"""
+    melody = pretty_midi.Instrument(program=0)  # Acoustic Grand Piano
 
+    for note, start, end in melody_data:
+        melody.notes.append(pretty_midi.Note(velocity=100, pitch=note, start=start, end=end))
+
+    midi.instruments.append(melody)
+
+def save_melody_to_midi(chord_progression, filename="melody_test.mid"):
+    """멜로디를 포함한 MIDI 파일 저장"""
     midi = pretty_midi.PrettyMIDI()
-    start_time = 0.0
-    beats_per_second = bpm / 60.0  # BPM을 초 단위로 변환
-    chord_duration = 4 / beats_per_second  # 4박자 지속 시간
 
-    # 🎹 피아노 트랙 추가
-    add_piano_track(midi, chord_progression, start_time, chord_duration)
+    # ✅ 1. 멜로디 생성 (기본 코드 진행 기반)
+    melody_data = generate_melody_from_chords(chord_progression)
 
-    # 🥁 드럼 트랙 추가
-    add_drum_track(midi, start_time, chord_duration, chord_progression)
+    # ✅ 2. 기존 백킹 트랙 추가 (건반 + 드럼 + 기타)
+    add_piano_track(midi, chord_progression, 0.0, 4)
+    add_drum_track(midi, 0.0, 4, chord_progression)
+    add_guitar_track(midi, chord_progression, 0.0, 4)
 
-    # 🎸 기타 트랙 추가 (✅ 기본적으로 항상 포함)
-    add_guitar_track(midi, chord_progression, start_time, chord_duration)
+    # ✅ 3. 멜로디 추가
+    add_melody_track(midi, melody_data)
 
-    # 🎯 지정된 경로에 MIDI 파일 저장
+    # ✅ 4. MIDI 파일 저장
     output_path = os.path.join(MIDI_SAVE_PATH, filename)
     midi.write(output_path)
-    print(f"✅ 기본 백킹 트랙 MIDI 파일이 생성되었습니다: {output_path}")
+    print(f"✅ 멜로디 포함 MIDI 파일 생성 완료: {output_path}")
 
-# 🎵 AI가 생성한 코드 진행 (샘플)
-ai_generated_chords = ["C9", "G9", "F9", "E7", "G9", "E Major", "G9", "Amaj7",
-                       "Cmaj7", "Bsus4", "Dmaj7", "D9", "Amaj7", "Dmaj7", "B7"]
+# 🎵 AI가 생성한 코드 진행
+ai_generated_chords = ["C Major", "G Major", "F Major", "E7", "A7", "D7", "G7"]
 
-# ✅ 기본 백킹 트랙 MIDI 생성 (건반 + 드럼 + 기타 포함)
-save_chord_progression_to_midi(ai_generated_chords, bpm=120)
+# ✅ MIDI 파일 생성 실행
+save_melody_to_midi(ai_generated_chords, filename="melody_test.mid")
