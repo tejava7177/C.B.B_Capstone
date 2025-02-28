@@ -34,15 +34,15 @@ def add_guitar_lead_track(midi, chord_progression, start_time, duration):
                 velocity=velocity, pitch=note_number, start=note_start, end=note_end
             ))
 
-        # 🎸 코드 진행 기반 리드 멜로디 (랜덤 패턴 추가)
-        melody_note = random.choice(midi_notes + [midi_notes[0] + 5, midi_notes[1] + 7, midi_notes[2] + 12])
-        melody_start = start_time + random.uniform(0.5, 1.5)
-        melody_end = melody_start + random.uniform(0.3, 0.6)
-        velocity = random.randint(100, 120)
-
-        guitar.notes.append(pretty_midi.Note(
-            velocity=velocity, pitch=melody_note, start=melody_start, end=melody_end
-        ))
+        # # 🎸 코드 진행 기반 리드 멜로디 (랜덤 패턴 추가)
+        # melody_note = random.choice(midi_notes + [midi_notes[0] + 5, midi_notes[1] + 7, midi_notes[2] + 12])
+        # melody_start = start_time + random.uniform(0.5, 1.5)
+        # melody_end = melody_start + random.uniform(0.3, 0.6)
+        # velocity = random.randint(100, 120)
+        #
+        # guitar.notes.append(pretty_midi.Note(
+        #     velocity=velocity, pitch=melody_note, start=melody_start, end=melody_end
+        # ))
 
         start_time += duration
 
