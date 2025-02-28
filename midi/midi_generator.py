@@ -13,7 +13,7 @@ from drums import add_drum_track
 from click_track import add_click_track
 from generate_melody import generate_melody_from_chords
 from guitar import add_guitar_lead_track  # ✅ 기존 기타 코드 기반 트랙 추가
-from piano import add_piano_track  # ✅ 기존 피아노 코드 기반 트랙 추가
+#from piano import add_piano_track  # ✅ 기존 피아노 코드 기반 트랙 추가
 
 # ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/logicFiles"
@@ -72,7 +72,7 @@ def save_melody_to_midi(chord_progression, bpm=120, filename="melody_test.mid"):
     melody_data = generate_melody_from_chords(chord_progression)
 
     # ✅ 4. 기존 백킹 트랙 추가 (Click Track 이후)
-    add_piano_track(midi, chord_progression, start_time, chord_duration)
+    #add_piano_track(midi, chord_progression, start_time, chord_duration)
     add_drum_track(midi, start_time, chord_duration, chord_progression, bpm)
     add_guitar_lead_track(midi, chord_progression, start_time, chord_duration)
 
