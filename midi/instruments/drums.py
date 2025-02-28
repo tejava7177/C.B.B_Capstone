@@ -17,17 +17,9 @@ def add_drum_track(midi, start_time, duration, chord_progression, bpm=120):
     tom2 = 47  # Mid Tom
     floor_tom = 45  # Floor Tom
 
-    # ✅ 🎵 "틱 틱 틱 틱" Click Track 도입부 (하이햇 닫힘)
-    click_duration = 60 / bpm  # 한 박자의 길이
-    click_start_time = start_time
-    for i in range(4):  # 4박자 Click Track
-        tick_time = click_start_time + (i * click_duration)
-        drum.notes.append(pretty_midi.Note(
-            velocity=100, pitch=closed_hihat, start=tick_time, end=tick_time + 0.1
-        ))
 
     # ✅ 기존 드럼 시작 시간 조정 (Click Track 이후)
-    start_time += 4 * click_duration  # "틱 틱 틱 틱" 도입부 이후 악기 시작
+
 
     # 🎵 랜덤한 드럼 패턴 스타일 선택
     rhythm_pattern = random.choice(["straight_8beat", "shuffle", "funky"])
