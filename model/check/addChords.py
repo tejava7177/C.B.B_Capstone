@@ -1,30 +1,34 @@
 import numpy as np
+import os
+from data.chord.chord_map import CHORD_MAP  # ✅ 자동으로 코드 리스트 가져오기
 
-# 기존 코드 매핑 로드
-chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy", allow_pickle=True).item()
+# ✅ 파일 경로 설정
+CHORD_INDEX_PATH = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy"
 
-# 새로운 코드 목록
-new_chords = [
-    # Seventh Chords (7th 코드)
-    "Cmaj7", "Gmaj7", "Amaj7", "Dmaj7", "Emaj7", "Fmaj7", "Bmaj7",
-    "C7", "G7", "A7", "D7", "E7", "B7", "F7",
+# ✅ 기존 코드 매핑 불러오기 (파일이 없으면 새로 생성)
+if os.path.exists(CHORD_INDEX_PATH):
+    chord_to_index = np.load(CHORD_INDEX_PATH, allow_pickle=True).item()
+    print(f"🔍 기존 코드 개수: {len(chord_to_index)}")
+else:
+    chord_to_index = {}  # 새 파일 생성
+    print("⚠️ 기존 코드 매핑 파일이 없음. 새로 생성합니다.")
 
-    # Suspended Chords (서스펜디드 코드)
-    "Csus4", "Gsus4", "Asus4", "Dsus4", "Esus4", "Fsus4",
+# ✅ 새로운 코드 목록 자동으로 가져오기
+new_chords = set(CHORD_MAP.values())
 
-    # Diminished Chords (디미니쉬 코드)
-    "Cdim", "Gdim", "Adim", "Ddim", "Bdim",
+# ✅ 기존 코드와 비교하여 추가해야 할 코드 찾기
+missing_chords = new_chords - set(chord_to_index.keys())
 
-    # Augmented Chords (어그먼트 코드)
-    "Caug", "Gaug", "Aaug", "Daug"
-]
+# ✅ 새로운 코드 추가
+for chord in missing_chords:
+    chord_to_index[chord] = len(chord_to_index)  # 새로운 인덱스 할당
 
-# 새로운 코드 추가
-for chord in new_chords:
-    if chord not in chord_to_index:
-        chord_to_index[chord] = len(chord_to_index)  # 새로운 인덱스 할당
+# ✅ 수정된 코드 매핑 저장
+np.save(CHORD_INDEX_PATH, chord_to_index)
 
-# 수정된 코드 매핑 저장
-np.save("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy", chord_to_index)
-
-print("✅ 새로운 코드가 추가되었습니다!")
+# ✅ 결과 출력
+print(f"✅ 새로운 코드 {len(missing_chords)}개가 추가되었습니다!")
+if missing_chords:
+    print("🎵 추가된 코드 목록:", missing_chords)
+else:
+    print("🔹 모든 코드가 이미 등록되어 있습니다.")
