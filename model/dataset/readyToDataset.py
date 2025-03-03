@@ -19,8 +19,9 @@ for seq in chord_sequences:
 X = np.array(X)
 Y = np.array(Y)
 
-# 출력(Y)을 One-Hot Encoding 변환
+# ✅ One-Hot Encoding 적용 후 차원 조정
 Y = to_categorical(Y, num_classes=NUM_CLASSES)
+Y = np.squeeze(Y)  # ✅ 차원 줄이기
 
 # 데이터 저장
 np.save("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/X.npy", X)
