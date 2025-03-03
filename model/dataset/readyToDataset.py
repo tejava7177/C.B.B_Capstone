@@ -6,7 +6,7 @@ chord_sequences = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/mod
 chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy", allow_pickle=True).item()
 
 # 하이퍼파라미터 설정
-SEQUENCE_LENGTH = 3  # 코드 진행 예측을 위한 입력 길이
+SEQUENCE_LENGTH = 4  # 코드 진행 예측을 위한 입력 길이
 NUM_CLASSES = len(chord_to_index)  # 🔥 총 코드 개수 반영
 
 # 입력(X)과 출력(Y) 생성
