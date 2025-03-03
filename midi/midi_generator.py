@@ -86,7 +86,7 @@ def save_melody_to_midi(chord_progression, bpm=120, filename="melody_test.mid"):
 
 
 # 🎵 AI가 생성한 코드 진행
-ai_generated_chords = ["C Major", "G Major", "F Minor", "C Major", "Dmaj7", "G Major", "F Major"]
+ai_generated_chords = ["Cmaj7", "Fmaj7", "Cmaj7", "Gm7", "Bmaj7", "G Major", "F Major"]
 
 # ✅ MIDI 파일 생성 실행
 save_melody_to_midi(ai_generated_chords, bpm=120, filename="melody_test.mid")
