@@ -51,7 +51,7 @@ def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.
 
 
 # ✅ 예측 실행 (임의의 초기 코드 진행 설정)
-seed_sequence = [chord_to_index["Cmaj7"], chord_to_index["Fmaj7"], chord_to_index["Cmaj7"], chord_to_index["Gm7"]]
+seed_sequence = [chord_to_index["Gmaj7"], chord_to_index["Am7"], chord_to_index["Bm7"], chord_to_index["Em7"]]
 predicted_chords = predict_next_chords(model, seed_sequence, num_predictions=12, temperature=TEMPERATURE)
 
 # ✅ 결과 출력
