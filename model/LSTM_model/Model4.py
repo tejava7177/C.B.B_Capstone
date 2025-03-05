@@ -17,7 +17,7 @@ NUM_CHORDS = len(chord_to_index)  # ✅ 코드 개수 (61개)
 TEMPERATURE = 1.2  # 🔥 Temperature Sampling 적용
 
 
-def sample_with_temperature(predictions, temperature=1.5):
+def sample_with_temperature(predictions, temperature=1.0):
     """Temperature Sampling을 적용하여 확률 기반 예측"""
     predictions = np.log(predictions + 1e-8) / temperature
     exp_preds = np.exp(predictions)
@@ -25,7 +25,7 @@ def sample_with_temperature(predictions, temperature=1.5):
     return np.random.choice(len(probabilities), p=probabilities)
 
 
-def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.5):
+def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=0.5):
     """주어진 코드 진행에서 다음 코드 예측"""
     predicted_chords = [index_to_chord[idx] for idx in seed_sequence]  # 초기 시퀀스 변환
 
