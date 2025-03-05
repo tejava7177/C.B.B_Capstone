@@ -7,6 +7,9 @@ import random
 sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/instruments")
 sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/data/scale")
 sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/test")
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/drum")
+
+
 
 # ✅ 악기별 트랙 불러오기
 from drums import add_drum_track
@@ -73,7 +76,7 @@ def save_melody_to_midi(chord_progression, bpm=120, filename="melody_test.mid"):
 
     # ✅ 4. 기존 백킹 트랙 추가 (Click Track 이후)
     #add_piano_track(midi, chord_progression, start_time, chord_duration)
-    add_drum_track(midi, start_time, chord_duration, chord_progression, bpm)
+    add_drum_track(midi, start_time, chord_duration, chord_progression)
     add_guitar_lead_track(midi, chord_progression, start_time, chord_duration)
 
     # ✅ 5. 멜로디 추가 (Click Track 이후, 백킹 트랙 길이 맞춤)
