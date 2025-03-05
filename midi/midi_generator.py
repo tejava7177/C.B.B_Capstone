@@ -11,7 +11,7 @@ sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/test")
 # ✅ 악기별 트랙 불러오기
 from drums import add_drum_track
 from click_track import add_click_track
-from guitar import add_guitar_lead_track
+from guitar import add_guitar_backing_track
 from melody import add_melody_track, generate_melody_from_chords  # ✅ 멜로디 생성 함수 추가
 # from piano import add_piano_track  # ✅ 기존 피아노 코드 기반 트랙 추가 가능
 
@@ -38,7 +38,7 @@ def save_melody_to_midi(chord_progression, bpm=120, filename="melody_test.mid"):
     # ✅ 4. 기존 백킹 트랙 추가 (Click Track 이후)
     # add_piano_track(midi, chord_progression, start_time, chord_duration)
     add_drum_track(midi, start_time, chord_duration, chord_progression)
-    add_guitar_lead_track(midi, chord_progression, start_time, chord_duration)
+    add_guitar_backing_track(midi, chord_progression, start_time, chord_duration)
 
     # ✅ 5. 멜로디 추가 (Click Track 이후, 백킹 트랙 길이 맞춤)
     add_melody_track(midi, melody_data, start_time, total_duration)  # ✅ melody_data를 전달하도록 수정
