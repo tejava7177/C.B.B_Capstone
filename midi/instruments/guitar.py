@@ -10,7 +10,7 @@ from chord_to_notes import CHORD_TO_NOTES
 def add_guitar_lead_track(midi, chord_progression, start_time, duration):
     """🎸 기타 리드 트랙 추가 (코드 시작 부분 강조 + 멜로디)"""
 
-    guitar = pretty_midi.Instrument(program=27)  # ✅ Distortion Guitar (Lead 역할)
+    guitar = pretty_midi.Instrument(program=25)  # ✅ Distortion Guitar (Lead 역할)
 
     for chord in chord_progression:
         # ✅ CHORD_TO_NOTES에서 코드 찾기 (없으면 C Major 기본 코드 사용)
