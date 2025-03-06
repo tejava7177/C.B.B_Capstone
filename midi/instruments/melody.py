@@ -2,7 +2,7 @@ import pretty_midi
 import random
 
 def get_melody_range_for_chord(chord):
-    """🎵 코드에 따라 멜로디 음역대 동적으로 조정"""
+    """🎵 코드에 따라 멜로디 음역대 설정 (자연스러운 진행)"""
     if "Cmaj" in chord or "Gmaj" in chord or "Fmaj" in chord:
         return (48, 72)  # C3 ~ C5
     elif "Dmin" in chord or "Emin" in chord:
@@ -12,17 +12,17 @@ def get_melody_range_for_chord(chord):
     return (48, 72)  # 기본값
 
 def generate_melody_from_chords(chord_progression):
-    """🎵 코드 기반으로 멜로디 생성 (음역대 개선 + 보조음 + 장식음)"""
+    """🎵 코드 기반으로 멜로디 생성 (코드에 맞춘 음역대 조정 + 변주 추가)"""
     melody_notes = []
     start_time = 0.0
     note_duration = 0.5  # 기본 한 음 길이 (4분음표)
 
     for chord in chord_progression:
-        # ✅ 코드에 따라 음역대 설정
+        # ✅ 코드에 맞는 음역대 적용
         min_pitch, max_pitch = get_melody_range_for_chord(chord)
 
-        # ✅ 기본 멜로디 생성
-        num_notes = random.randint(2, 4)  # 마디당 최소 2~4개의 음 생성
+        # ✅ 멜로디 변주 추가
+        num_notes = random.randint(2, 4)  # 한 마디에 최소 2~4개 음 추가
         notes_in_bar = []
 
         for _ in range(num_notes):
@@ -35,9 +35,9 @@ def generate_melody_from_chords(chord_progression):
     return melody_notes  # ✅ 생성된 멜로디 데이터 반환
 
 def add_melody_track(midi, chord_progression, start_time, total_duration, instrument_program=0):
-    """🎵 멜로디 트랙 추가 (건반 or 기타 멜로디)"""
+    """🎵 건반 멜로디 트랙 추가 (자연스러운 변주 및 리듬감 적용)"""
 
-    melody = pretty_midi.Instrument(program=instrument_program)  # 기본 건반 (Acoustic Grand Piano)
+    melody = pretty_midi.Instrument(program=0)  # 기본 건반 (Acoustic Grand Piano)
 
     # ✅ 새로운 멜로디 생성 방식 적용
     melody_data = generate_melody_from_chords(chord_progression)

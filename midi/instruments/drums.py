@@ -18,8 +18,8 @@ def add_drum_track(midi, start_time, duration, chord_progression):
         drum = apply_rhythm_pattern(drum, bar_start_time, duration, rhythm_pattern)
 
         # 🎵 필인 및 심벌 추가
-        if bar % 4 == 3:
-            drum = add_fill(drum, bar_start_time + (7 * (duration / 8)))
+        # if bar % 4 == 3:
+        #     drum = add_fill(drum, bar_start_time + (7 * (duration / 8)))
         drum = add_cymbals(drum, bar_start_time, bar)
 
     midi.instruments.append(drum)
