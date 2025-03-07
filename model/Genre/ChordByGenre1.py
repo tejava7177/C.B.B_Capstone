@@ -11,7 +11,7 @@ chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/mode
 index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
 
 # 예측을 위한 설정
-SEQUENCE_LENGTH = 3
+SEQUENCE_LENGTH = 4  # 🔥 기존 3개에서 4개로 변경
 TEMPERATURE = 1.2  # 🔥 Temperature Sampling 적용
 
 
@@ -23,8 +23,8 @@ def sample_with_temperature(predictions, temperature=1.5):
     return np.random.choice(len(probabilities), p=probabilities)
 
 
-# 🎼 스타일별 자연스러운 코드 진행 필터링
-def apply_style(chord_progression, style="blues"):
+# 🎼 스타일별 코드 진행 변환 (재즈, 블루스, 락 지원)
+def apply_style(chord_progression, style="jazz"):
     """AI가 예측한 코드 진행을 특정 스타일로 변환"""
     style_map = {
         "blues": {
@@ -43,28 +43,27 @@ def apply_style(chord_progression, style="blues"):
         }
     }
 
-    # 🎯 비정상적인 코드 진행 필터링 추가
     def adjust_chord_progression(chords, style):
         if style == "blues":
             if "Emaj7" in chords:
-                chords[chords.index("Emaj7")] = "E7"  # Blues에서 Emaj7 대신 E7 사용
+                chords[chords.index("Emaj7")] = "E7"
             if "F Minor" in chords:
-                chords[chords.index("F Minor")] = "F7"  # Blues에서 F Minor 대신 F7 사용
+                chords[chords.index("F Minor")] = "F7"
         elif style == "rock":
             if "Emaj7" in chords:
-                chords[chords.index("Emaj7")] = "E5"  # Rock에서 Emaj7 대신 E5 사용
+                chords[chords.index("Emaj7")] = "E5"
             if "F Minor" in chords:
-                chords[chords.index("F Minor")] = "F Major"  # Rock에서 F Minor 대신 F Major 사용
+                chords[chords.index("F Minor")] = "F Major"
         elif style == "jazz":
             if "E Major" in chords:
-                chords[chords.index("E Major")] = "Emaj7"  # Jazz에서 E Major 대신 Emaj7 사용
+                chords[chords.index("E Major")] = "Emaj7"
         return chords
 
     styled_chords = [style_map.get(style, {}).get(chord, chord) for chord in chord_progression]
     return adjust_chord_progression(styled_chords, style)
 
 
-def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.5):
+def predict_next_chords(model, seed_sequence, num_predictions=12, temperature=1.5):
     """주어진 코드 진행에서 다음 코드 예측"""
     predicted_chords = [index_to_chord[idx] for idx in seed_sequence]  # 초기 시퀀스 변환
 
@@ -81,14 +80,17 @@ def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.
     return predicted_chords
 
 
-# 🎯 예측 실행 (임의의 초기 코드 진행 설정)
-seed_sequence = [chord_to_index["C Major"], chord_to_index["G Major"], chord_to_index["F Minor"]]
+# 🎯 예측 실행 (초기 코드 진행 4개 설정)
+seed_sequence = [
+    chord_to_index["C Major"],
+    chord_to_index["G Major"],
+    chord_to_index["F Minor"],
+    chord_to_index["D Minor"]
+]
 predicted_chords = predict_next_chords(model, seed_sequence, num_predictions=12, temperature=TEMPERATURE)
 
-# 🎼 🎸 🎷 🎶 3가지 스타일 변환 적용!
+# 🎷 재즈 스타일 코드 진행 변환
 jazz_chords = apply_style(predicted_chords, style="jazz")
-blues_chords = apply_style(predicted_chords, style="blues")
-rock_chords = apply_style(predicted_chords, style="rock")
 
 # 🎼 결과 출력
 print("\n🎼 AI가 생성한 원본 코드 진행:")
@@ -96,9 +98,3 @@ print(" → ".join(predicted_chords))
 
 print("\n🎷 Jazz 스타일 코드 진행:")
 print(" → ".join(jazz_chords))
-
-print("\n🎸 Blues 스타일 코드 진행:")
-print(" → ".join(blues_chords))
-
-print("\n🎸 Rock 스타일 코드 진행:")
-print(" → ".join(rock_chords))
