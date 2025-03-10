@@ -3,19 +3,23 @@ import os
 import sys
 
 # ✅ 경로 설정
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi")
 sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/jazz")
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/instruments")
 
 # ✅ 악기별 트랙 불러오기
-from drums_jazz import add_jazz_drum_track  # 🎷 재즈 드럼 추가
-from guitar_jazz import add_jazz_guitar_comping, add_jazz_guitar_solo  # ✅ 두 가지 기타 트랙 추가
-
-
+from drums_jazz import add_jazz_drum_track  # 🎷 재즈 드럼
+from guitar_jazz import add_jazz_guitar_comping  # 🎸 코드 컴핑
+from piano_jazz import add_jazz_piano_track  # 🎹 재즈 피아노
 
 # ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/midi/logicFiles/jazz"
 
 def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.mid"):
-    """🎷 재즈 백킹 트랙 생성 (드럼 + 기타 포함)"""
+    """🎷 재즈 백킹 트랙 생성 (드럼 + 기타 + 피아노 포함)"""
+    if not isinstance(chord_progression, list):
+        raise TypeError(f"❌ 오류: chord_progression이 리스트가 아님! 현재 타입: {type(chord_progression)}")
+
     midi = pretty_midi.PrettyMIDI()
     start_time = 0.0
 
@@ -24,13 +28,16 @@ def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.
     chord_duration = 4 / beats_per_second  # 🎵 코드 지속 시간 (1마디 기준)
 
     # ✅ 1. 드럼 트랙 추가
-    print("🎵 Adding Jazz Drum Track...")
+    print("🥁 Adding Jazz Drum Track...")
     add_jazz_drum_track(midi, start_time, chord_duration, chord_progression)
 
     # ✅ 2. 기타 트랙 추가
     print("🎸 Adding Jazz Guitar Track...")
     add_jazz_guitar_comping(midi, start_time, chord_duration, chord_progression)  # 🎸 코드 컴핑
-    add_jazz_guitar_solo(midi, start_time, chord_duration, chord_progression)  # 🎸 즉흥 기타 솔로 (자연스러운 리듬 포함)
+
+    # ✅ 3. 피아노 트랙 추가
+    print("🎹 Adding Piano Track...")
+    add_jazz_piano_track(midi, start_time, chord_duration, chord_progression)  # 🎵 인자 순서 맞춤
 
     # ✅ MIDI 파일 저장
     output_path = os.path.join(MIDI_SAVE_PATH, filename)
