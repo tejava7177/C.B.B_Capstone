@@ -16,7 +16,8 @@ from guitar_jazz import add_jazz_guitar_comping, get_guitar_chord_variation  # �
 from piano_jazz import add_jazz_piano_track, get_piano_chord_variation   # 🎹 재즈 피아노
 from piano_jazz_soft import add_jazz_piano_comping
 from string_jazz import add_jazz_strings_track
-from englich_horn import add_jazz_saxophone_track
+from english_horn import add_jazz_horn_track
+
 
 # ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = os.path.join(PROJECT_DIR, "logicFiles/jazz")
@@ -34,16 +35,16 @@ def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.
 
     # ✅ 코드 진행 1마디당 길이 계산 (4박자 기준)
     beats_per_second = bpm / 60.0
-    chord_duration = 4 / beats_per_second  # 🎵 코드 지속 시간 (1마디 기준)
+    chord_duration = 3 / beats_per_second  # 🎵 코드 지속 시간 (1마디 기준)
 
     # ✅ 1. 드럼 트랙 추가
     print("🥁 Adding Jazz Drum Track...")
     add_jazz_drum_track(midi, start_time, chord_duration, chord_progression)
 
-    # ✅ 2. 기타 트랙 추가 (기타 코드 변환 적용)
-    print("🎸 Adding Jazz Guitar Track...")
-    guitar_progression = [get_guitar_chord_variation(chord) for chord in chord_progression]
-    add_jazz_guitar_comping(midi, start_time, chord_duration, guitar_progression)
+    # # ✅ 2. 기타 트랙 추가 (기타 코드 변환 적용)
+    # print("🎸 Adding Jazz Guitar Track...")
+    # guitar_progression = [get_guitar_chord_variation(chord) for chord in chord_progression]
+    # add_jazz_guitar_comping(midi, start_time, chord_duration, guitar_progression)
 
     # ✅ 3. 피아노 트랙 추가 (피아노 코드 변환 적용)
     print("🎹 Adding Piano Track...")
@@ -55,14 +56,15 @@ def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.
     print("🎼 Adding Soft Jazz Piano Track...")
     soft_piano_progression = [get_piano_chord_variation(chord) for chord in chord_progression]
     add_jazz_piano_track(midi, start_time, chord_duration, soft_piano_progression)
+    #
+    # # ✅ 4. 현악기 트랙 추가
+    # print("🎻 Adding Strings Track...")
+    # add_jazz_strings_track(midi, start_time, chord_duration, chord_progression)
+    #
+    # # ✅ 5. 잉글리쉬 호른 트랙 추가
+    # print("🎻 Adding English Horn Track...")
+    # horn_track = add_jazz_horn_track(midi, start_time, chord_duration, chord_progression)  # ✅ 트랙 저장
 
-    # ✅ 4. 현악기 트랙 추가
-    print("🎻 Adding Strings Track...")
-    add_jazz_strings_track(midi, start_time, chord_duration, chord_progression)
-
-    # ✅ 5. 색소폰 트랙 추가
-    print("🎷 Adding Saxophone Track...")
-    add_jazz_saxophone_track(midi, start_time, chord_duration, chord_progression)
 
     # ✅ MIDI 파일 저장
     output_path = os.path.join(MIDI_SAVE_PATH, filename)
