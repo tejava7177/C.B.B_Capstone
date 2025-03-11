@@ -1,88 +1,94 @@
 import pretty_midi
 import random
+import sys
 
-# 🎹 재즈 피아노 코드 보이싱 (싱글 노트와 조합)
-JAZZ_PIANO_VOICINGS = {
-    "Cmaj7": [48, 52, 55, 59, 62],  # C E G B D (9th 포함)
-    "Dm7": [50, 53, 57, 60, 64],    # D F A C E
-    "G7": [43, 50, 53, 57, 62],     # G B D F A
-    "Fmaj7": [41, 45, 48, 52, 57],  # F A C E G
-    "Bm7": [47, 50, 54, 57, 61],    # B D F# A C#
-    "E7": [40, 47, 50, 54, 60],     # E G# B D F#
-    "Am7": [45, 48, 52, 55, 59]     # A C E G B
+# ✅ CHORD_TO_NOTES 가져오기 (chord_map.py 활용)
+sys.path.append("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/data/chord")
+from chord_to_notes import CHORD_TO_NOTES
+
+# 🎹 예외 처리를 위한 기본 재즈 코드 보이싱
+JAZZ_VOICINGS = {
+    "Cmaj7": [60, 64, 67, 71],
+    "Dm7": [62, 65, 69, 72],
+    "G7": [43, 50, 53, 57],
+    "Fmaj7": [41, 45, 48, 52],
+    "Bm7": [47, 50, 54, 57],
+    "E7": [40, 47, 50, 54],
+    "Am7": [45, 48, 52, 55]
 }
 
-# 🎹 재즈 피아노 싱글노트 스케일 (솔로 및 필인)
-JAZZ_PIANO_SCALES = {
-    "Cmaj7": [60, 62, 64, 65, 67, 69, 71, 72],
-    "Dm7": [62, 64, 65, 67, 69, 71, 72, 74],
-    "G7": [67, 69, 71, 72, 74, 76, 77, 79],
-    "Fmaj7": [65, 67, 69, 70, 72, 74, 76, 77],
-    "Bm7": [71, 73, 74, 76, 78, 80, 81, 83],
-    "E7": [64, 66, 68, 69, 71, 73, 74, 76],
-    "Am7": [69, 71, 72, 74, 76, 78, 79, 81]
-}
-
-# 🎹 랜덤한 리듬 패턴 (싱글노트 + 코드 조합)
-PIANO_RHYTHM_PATTERNS = [
-    [0, 2],  # 1, 3 박자
-    [0, 1, 2],  # 1, 2, 3 박자
-    [0, 3],  # 1, 4 박자
-    [0, 1, 2, 3],  # 1, 2, 3, 4 박자
-    [0, 1.5, 2.5],  # 스윙 스타일 엇박
-    [0, 2, 2.75]  # 불규칙한 박자
+# 🎵 느린 박자 리듬 패턴
+SLOW_RHYTHM_PATTERNS = [
+    [0],  # 첫 박자에서 코드 연주 후 유지
+    [0, 2],  # 첫 박자와 셋째 박자에서 연주
+    [0, 3],  # 첫 박자와 넷째 박자에서 연주
 ]
 
-# 🎹 재즈 피아노 트랙 추가 (연결감 + 레가토 포함)
+# 🎵 싱글노트 멜로디 패턴 (필인용)
+SINGLE_NOTE_PATTERNS = [
+    [1.5],  # 2박 반에서 싱글 노트
+    [2.5],  # 3박 반에서 싱글 노트
+    [1, 2.5],  # 2박, 3박 반에서 싱글 노트
+]
+
+
+def get_piano_chord_variation(chord):
+    """🎵 코드에 따른 재즈 보이싱 생성 (CHORD_TO_NOTES 활용)"""
+
+    # 🎯 리스트가 들어왔을 경우 첫 번째 값 사용
+    if isinstance(chord, list):
+        chord = chord[0]  # ✅ 리스트의 첫 번째 코드만 사용
+
+    # 🎯 숫자(MIDI 노트 값)가 들어왔다면 변환하지 않음
+    if isinstance(chord, (int, float)):
+        print(f"⚠️ Warning: MIDI Note '{chord}'가 코드로 감지됨. 변환하지 않음.")
+        return [chord]
+
+    # 🎯 코드가 CHORD_TO_NOTES에 있는지 확인
+    if chord in CHORD_TO_NOTES:
+        base_notes = CHORD_TO_NOTES[chord]
+    else:
+        print(f"⚠️ Warning: '{chord}' 코드가 CHORD_TO_NOTES에 없음. 기본 C Major 사용")
+        base_notes = CHORD_TO_NOTES["C Major"]  # ✅ Cmaj7 대신 C Major 사용
+
+    return base_notes[:4]  # 4개 음만 사용
 def add_jazz_piano_track(midi, start_time, duration, chord_progression):
-    """🎹 재즈 피아노 (싱글 노트 & 코드 컴핑 조합, 연결감 추가)"""
+    """🎹 재즈 피아노 코드 컴핑 (느린 박자, 부드러운 연결)"""
 
-    piano = pretty_midi.Instrument(program=0)  # ✅ Acoustic Grand Piano
-
-    previous_end_time = start_time  # 🎵 이전 노트의 종료 시간을 저장
+    piano = pretty_midi.Instrument(program=0)  # 🎹 Acoustic Grand Piano
 
     for bar, chord in enumerate(chord_progression):
         bar_start_time = start_time + (bar * duration)
-        chord_notes = JAZZ_PIANO_VOICINGS.get(chord, JAZZ_PIANO_VOICINGS["Cmaj7"])
-        scale_notes = JAZZ_PIANO_SCALES.get(chord, JAZZ_PIANO_SCALES["Cmaj7"])
+        chord_notes = get_piano_chord_variation(chord)  # ✅ CHORD_TO_NOTES 기반으로 코드 보이싱 생성
 
-        # ✅ 랜덤한 리듬 패턴 선택 (정박 70%, 엇박 30%)
-        if random.random() < 0.7:
-            rhythm_pattern = random.choice(PIANO_RHYTHM_PATTERNS[:4])  # 정박 위주 선택
-        else:
-            rhythm_pattern = random.choice(PIANO_RHYTHM_PATTERNS[4:])  # 엇박 선택
+        # ✅ 랜덤한 느린 리듬 패턴 선택
+        rhythm_pattern = random.choice(SLOW_RHYTHM_PATTERNS)
+
+        # ✅ 왼손 (저음 루트음)과 오른손 (보이싱)을 분리
+        left_hand = [chord_notes[0] - 12]  # 루트 노트 (옥타브 낮춤)
+        right_hand = chord_notes[1:]  # 나머지 보이싱
 
         for beat in rhythm_pattern:
             beat_time = bar_start_time + (beat * (duration / 4))
-            beat_time += random.uniform(-0.05, 0.05)  # 박자 미세 조정
+            beat_time += random.uniform(-0.05, 0.05)  # 🎵 박자 랜덤 딜레이
 
-            # ✅ 50% 확률로 코드 / 50% 확률로 싱글노트 연주
-            if random.random() > 0.5:
-                # 🎹 코드 컴핑 연주 (조금 더 부드럽게)
-                altered_chord = [n + random.choice([-2, 2]) if random.random() < 0.3 else n for n in chord_notes]
-                velocity_variation = [random.randint(70, 100) for _ in altered_chord]
-                for i, note in enumerate(altered_chord):
-                    piano.notes.append(pretty_midi.Note(
-                        velocity=velocity_variation[i],
-                        pitch=note,
-                        start=beat_time + (i * 0.02),  # 롤링 효과 적용
-                        end=beat_time + 0.5  # 음을 조금 더 길게 늘려서 레가토 효과
-                    ))
-            else:
-                # 🎵 싱글 노트 멜로디 추가 (연결감 추가)
-                single_note = random.choice(scale_notes)
-                note_length = random.choice([0.2, 0.3, 0.4, 0.6])  # 🎵 다양한 리듬 적용
-                velocity = random.randint(65, 100)
-
-                if beat_time < previous_end_time:
-                    beat_time = previous_end_time + random.uniform(0.05, 0.1)  # ✅ 이전 음과 겹치지 않도록 조정
-
-                previous_end_time = beat_time + note_length  # ✅ 다음 음의 시작점을 조정
-
+            # 🎹 왼손 (루트음) 추가 - 길게 유지
+            for note in left_hand:
                 piano.notes.append(pretty_midi.Note(
-                    velocity=velocity,
-                    pitch=single_note,
+                    velocity=random.randint(70, 90),
+                    pitch=note,
                     start=beat_time,
+                    end=beat_time + duration * random.uniform(0.7, 1.0)  # 랜덤한 길이
+                ))
+
+            # 🎹 오른손 (코드 보이싱) 추가 - 부드러운 시간차 적용
+            for i, note in enumerate(right_hand):
+                delay = random.uniform(0.05, 0.15) * i  # 🎵 부드러운 연결감 (시간차 적용)
+                note_length = duration * random.uniform(0.5, 0.8)  # 🎵 랜덤한 길이 적용
+                piano.notes.append(pretty_midi.Note(
+                    velocity=random.randint(75, 95),
+                    pitch=note,
+                    start=beat_time + delay,
                     end=beat_time + note_length
                 ))
 

@@ -17,7 +17,23 @@ JAZZ_GUITAR_RHYTHMS = [
 ]
 
 # 🎸 기타 프로그램 변경 (Jazz Guitar로 설정)
-GUITAR_PROGRAM = 33  # ✅ MIDI Program Number (27: Jazz Guitar)
+GUITAR_PROGRAM = 25  # ✅ MIDI Program Number (27: Jazz Guitar)
+
+
+# 🎸 기타 코드 진행 대체 (서브스티튜션)
+GUITAR_SUBSTITUTIONS = {
+    "Cmaj7": ["C6", "E7"],
+    "Dm7": ["Fmaj7", "A7"],
+    "G7": ["D9", "G13"],
+    "Fmaj7": ["Bbmaj7", "D7"],
+    "Bm7": ["E7", "Dmaj7"],
+    "E7": ["A7", "E9"],
+    "Am7": ["D9", "G7"]
+}
+
+def get_guitar_chord_variation(chord):
+    """기타 코드 진행에 대체 코드 적용"""
+    return random.choice(GUITAR_SUBSTITUTIONS.get(chord, [chord]))  # 기본값 유지
 
 
 def add_jazz_guitar_comping(midi, start_time, duration, chord_progression):
