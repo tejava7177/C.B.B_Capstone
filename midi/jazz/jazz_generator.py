@@ -14,6 +14,7 @@ sys.path.extend([
 from drums_jazz import add_jazz_drum_track  # 🥁 재즈 드럼
 from guitar_jazz import add_jazz_guitar_comping, get_guitar_chord_variation  # 🎸 기타 코드 컴핑
 from piano_jazz import add_jazz_piano_track, get_piano_chord_variation   # 🎹 재즈 피아노
+from piano_jazz_soft import add_soft_jazz_piano_track, get_soft_jazz_voicing
 
 # ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = os.path.join(PROJECT_DIR, "logicFiles/jazz")
@@ -45,7 +46,13 @@ def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.
     # ✅ 3. 피아노 트랙 추가 (피아노 코드 변환 적용)
     print("🎹 Adding Piano Track...")
     piano_progression = [get_piano_chord_variation(chord) for chord in chord_progression]
-    add_jazz_piano_track(midi, start_time, chord_duration, piano_progression)  # ✅ 파라미터 순서 맞춤
+    add_jazz_piano_track(midi, start_time, chord_duration, piano_progression)
+
+    # ✅ 4. 감미로운 피아노 코드 컴핑 트랙 추가
+    print("🎼 Adding Soft Jazz Piano Track...")
+    soft_piano_progression = [get_piano_chord_variation(chord) for chord in chord_progression]
+    add_soft_jazz_piano_track(midi, start_time, chord_duration, soft_piano_progression)
+
 
     # ✅ MIDI 파일 저장
     output_path = os.path.join(MIDI_SAVE_PATH, filename)
