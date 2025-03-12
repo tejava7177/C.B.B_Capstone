@@ -76,4 +76,4 @@ def generate_jazz_backing_track(chord_progression, bpm=120, filename="jazz_test.
 jazz_chords = ["Cmaj7", "Dm7", "G7", "Cmaj7", "Fmaj7", "Bm7", "E7", "Am7"]
 
 # ✅ Jazz 트랙 생성 실행
-generate_jazz_backing_track(jazz_chords, bpm=120, filename="jazzBacking0311.mid")
+generate_jazz_backing_track(jazz_chords, bpm=120, filename="jazzBacking0312.mid")
