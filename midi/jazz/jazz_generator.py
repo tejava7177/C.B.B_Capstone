@@ -11,7 +11,7 @@ sys.path.extend([
 ])
 
 # ✅ 악기별 트랙 불러오기
-from drums_jazz import add_jazz_drum_track  # 🥁 재즈 드럼
+from drum_jazz import add_jazz_drum_track  # 🥁 재즈 드럼
 from guitar_jazz import add_jazz_guitar_comping, get_guitar_chord_variation  # 🎸 기타 코드 컴핑
 from piano_jazz import add_jazz_piano_track, get_piano_chord_variation   # 🎹 재즈 피아노
 from piano_jazz_soft import add_jazz_piano_comping
