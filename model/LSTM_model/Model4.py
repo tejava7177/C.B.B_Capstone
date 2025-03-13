@@ -17,6 +17,11 @@ NUM_CHORDS = len(chord_to_index)  # ✅ 코드 개수 (61개)
 TEMPERATURE = 1.2  # 🔥 Temperature Sampling 적용
 
 
+def clean_chord_name(chord):
+    """코드명에서 공백 제거 및 불필요한 문자 정리"""
+    return chord.replace(" ", "").replace("majmaj", "maj").replace("minmin", "min")
+
+
 def sample_with_temperature(predictions, temperature=1.0):
     """Temperature Sampling을 적용하여 확률 기반 예측"""
     predictions = np.log(predictions + 1e-8) / temperature
@@ -27,7 +32,7 @@ def sample_with_temperature(predictions, temperature=1.0):
 
 def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=0.5):
     """주어진 코드 진행에서 다음 코드 예측"""
-    predicted_chords = [index_to_chord[idx] for idx in seed_sequence]  # 초기 시퀀스 변환
+    predicted_chords = [clean_chord_name(index_to_chord[idx]) for idx in seed_sequence]  # ✅ 공백 제거 적용
 
     for _ in range(num_predictions):
         seed_sequence = seed_sequence[-SEQUENCE_LENGTH:]  # ✅ 항상 입력 크기 맞추기
@@ -43,15 +48,20 @@ def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=0.
             print(f"⚠️ Warning: 예상 범위를 벗어난 코드 인덱스 {next_index}, 기본 코드 사용")
             next_index = 0  # 기본값으로 C Major
 
-        next_chord = index_to_chord[next_index]
+        next_chord = clean_chord_name(index_to_chord[next_index])  # ✅ 공백 제거 적용
         predicted_chords.append(next_chord)
         seed_sequence.append(next_index)  # ✅ 새로운 코드 추가
 
     return predicted_chords
 
 
-# ✅ 예측 실행 (임의의 초기 코드 진행 설정)
-seed_sequence = [chord_to_index["Gmaj7"], chord_to_index["Am7"], chord_to_index["Bm7"], chord_to_index["Em7"]]
+# ✅ 예측 실행 (초기 코드 진행 설정)
+seed_sequence = [
+    chord_to_index[clean_chord_name("Gmaj7")],
+    chord_to_index[clean_chord_name("Am7")],
+    chord_to_index[clean_chord_name("Bm7")],
+    chord_to_index[clean_chord_name("Em7")]
+]
 predicted_chords = predict_next_chords(model, seed_sequence, num_predictions=12, temperature=TEMPERATURE)
 
 # ✅ 결과 출력

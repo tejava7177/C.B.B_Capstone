@@ -3,22 +3,22 @@
 
 CHORD_TO_NOTES = {
     # Major Chords
-    "C Major": [60, 64, 67],
-    "D Major": [62, 66, 69],
-    "E Major": [64, 68, 71],
-    "F Major": [65, 69, 72],
-    "G Major": [67, 71, 74],
-    "A Major": [69, 73, 76],
-    "B Major": [71, 75, 78],
+    "CMajor": [60, 64, 67],
+    "DMajor": [62, 66, 69],
+    "EMajor": [64, 68, 71],
+    "FMajor": [65, 69, 72],
+    "GMajor": [67, 71, 74],
+    "AMajor": [69, 73, 76],
+    "BMajor": [71, 75, 78],
 
     # Minor Chords
-    "C Minor": [60, 63, 67],
-    "D Minor": [62, 65, 69],
-    "E Minor": [64, 67, 71],
-    "F Minor": [65, 68, 72],
-    "G Minor": [67, 70, 74],
-    "A Minor": [69, 72, 76],
-    "B Minor": [71, 74, 78],
+    "CMinor": [60, 63, 67],
+    "DMinor": [62, 65, 69],
+    "EMinor": [64, 67, 71],
+    "FMinor": [65, 68, 72],
+    "GMinor": [67, 70, 74],
+    "AMinor": [69, 72, 76],
+    "BMinor": [71, 74, 78],
 
     # 7th Chords
     "C7": [60, 64, 67, 70],
