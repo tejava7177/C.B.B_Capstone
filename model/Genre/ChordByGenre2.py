@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 
 # 모델 로드
-model_path = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/training/lstm_chord_model3.h5"
+model_path = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/training/lstm_chord_model4.h5"
 model = tf.keras.models.load_model(model_path)
 
 # 코드 매핑 로드
@@ -11,7 +11,7 @@ chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/mode
 index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
 
 # 예측을 위한 설정
-SEQUENCE_LENGTH = 3
+SEQUENCE_LENGTH = 4
 TEMPERATURE = 1.2  # 🔥 Temperature Sampling 적용
 
 
@@ -28,9 +28,10 @@ def apply_style(chord_progression, style="funk"):
     """AI가 예측한 코드 진행을 특정 스타일로 변환"""
 
     style_map = {
-        "funk": {
-            "C Major": "C9", "G Major": "G9", "D Major": "D9",
-            "A Minor": "Am7", "E Minor": "Em7", "F Major": "F9"
+        "punk": {
+            "C Major": "C5", "G Major": "G5", "D Major": "D5",
+            "A Minor": "A5", "E Minor": "E5", "F Major": "F5",
+            "B Major": "B5", "E Major": "E5", "A Major": "A5"
         },
         "reggae": {
             "C Major": "Cmaj7", "G Major": "G7", "D Major": "D7",
@@ -42,27 +43,23 @@ def apply_style(chord_progression, style="funk"):
         }
     }
 
-    # 🎯 비정상적인 코드 진행 필터링 추가
-    def adjust_chord_progression(chords, style):
-        if style == "funk":
-            if "Emaj7" in chords:
-                chords[chords.index("Emaj7")] = "E7"  # Funk에서 Emaj7 대신 E7 사용
-            if "F Minor" in chords:
-                chords[chords.index("F Minor")] = "F9"  # Funk에서 F Minor 대신 F9 사용
-        elif style == "reggae":
-            if "Emaj7" in chords:
-                chords[chords.index("Emaj7")] = "E7"  # Reggae에서 Emaj7 대신 E7 사용
-            if "F Minor" in chords:
-                chords[chords.index("F Minor")] = "Fmaj7"  # Reggae에서 F Minor 대신 Fmaj7 사용
-        elif style == "rnb":
-            if "E Major" in chords:
-                chords[chords.index("E Major")] = "Emaj9"  # R&B에서 E Major 대신 Emaj9 사용
-            if "D Major" in chords:
-                chords[chords.index("D Major")] = "D9"  # R&B에서 D Major 대신 D9 사용
-        return chords
-
+    # 🎯 스타일 맵 적용
     styled_chords = [style_map.get(style, {}).get(chord, chord) for chord in chord_progression]
+
+    # 🎸 코드 변환 최종 조정
     return adjust_chord_progression(styled_chords, style)
+
+
+def adjust_chord_progression(chords, style):
+    """펑크, 레게, R&B 스타일에 맞춰 코드 진행 조정"""
+    if style == "punk":
+        for i, chord in enumerate(chords):
+            if chord.endswith("maj7") or chord.endswith("7") or chord.endswith("9"):
+                chords[i] = chord[:-1] + "5"  # ✅ 모든 maj7, 7, 9 코드 → 5 코드 변환
+            elif "Minor" in chord or "min" in chord:
+                chords[i] = chord.replace("Minor", "5").replace("min", "5")  # ✅ Minor 계열 → 5 코드 변환
+
+    return chords
 
 
 def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.5):
@@ -83,11 +80,11 @@ def predict_next_chords(model, seed_sequence, num_predictions=10, temperature=1.
 
 
 # 🎯 예측 실행 (임의의 초기 코드 진행 설정)
-seed_sequence = [chord_to_index["C Major"], chord_to_index["G Major"], chord_to_index["F Minor"]]
+seed_sequence = [chord_to_index["C Major"], chord_to_index["G Major"], chord_to_index["F Minor"], chord_to_index["B Major"]]
 predicted_chords = predict_next_chords(model, seed_sequence, num_predictions=12, temperature=TEMPERATURE)
 
 # 🎼 🎸 🎷 🎶 3가지 스타일 변환 적용!
-funk_chords = apply_style(predicted_chords, style="funk")
+punk_chords = apply_style(predicted_chords, style="punk")
 reggae_chords = apply_style(predicted_chords, style="reggae")
 rnb_chords = apply_style(predicted_chords, style="rnb")
 
@@ -95,8 +92,8 @@ rnb_chords = apply_style(predicted_chords, style="rnb")
 print("\n🎼 AI가 생성한 원본 코드 진행:")
 print(" → ".join(predicted_chords))
 
-print("\n🎵 Funk 스타일 코드 진행:")
-print(" → ".join(funk_chords))
+print("\n🎵 Punk 스타일 코드 진행:")
+print(" → ".join(punk_chords))
 
 print("\n🎶 Reggae 스타일 코드 진행:")
 print(" → ".join(reggae_chords))
