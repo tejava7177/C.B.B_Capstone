@@ -19,6 +19,7 @@ from chord_to_notes import CHORD_TO_NOTES
 # ✅ 악기별 트랙 불러오기
 from drum_punk import add_punk_drum_track  # 🥁 펑크 드럼
 from guitar_punk import add_punk_guitar_track  # 🎸 펑크 기타
+from synth_punk import add_punk_synth_track
 
 # ✅ MIDI 저장 경로
 MIDI_SAVE_PATH = os.path.join(PROJECT_DIR, "logicFiles/punk")
@@ -44,6 +45,10 @@ def generate_punk_backing_track(chord_progression, bpm=180, filename="punk_test.
     # ✅ 기타 트랙 추가
     print("🎸 Adding Punk Guitar Track...")
     add_punk_guitar_track(midi, start_time, chord_duration, chord_progression)
+
+    # ✅ 기타 트랙 추가
+    print("🎹 Adding Punk Synth Track...")
+    add_punk_synth_track(midi, start_time, chord_duration, chord_progression)
 
     output_path = os.path.join(MIDI_SAVE_PATH, filename)
     midi.write(output_path)
