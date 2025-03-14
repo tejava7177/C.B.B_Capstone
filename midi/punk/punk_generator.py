@@ -54,4 +54,4 @@ def generate_punk_backing_track(chord_progression, bpm=180, filename="punk_test.
 punk_chords = ["C5", "G5", "F5", "E5", "G5", "E5", "G5", "A5"]
 
 # ✅ Punk 트랙 생성 실행
-generate_punk_backing_track(punk_chords, bpm=180, filename="punkBacking0312.mid")
+generate_punk_backing_track(punk_chords, bpm=180, filename="punkBacking0314.mid")
