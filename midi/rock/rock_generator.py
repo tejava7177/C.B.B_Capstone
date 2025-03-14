@@ -11,7 +11,7 @@ sys.path.extend([
 
 # ✅ 악기별 트랙 불러오기
 from drum_rock import add_rock_drum_track  # 🥁 락 드럼
-# from guitar_rock import add_rock_guitar_track  # 🎸 락 기타
+from guitar_rock import add_rock_guitar_track  # 🎸 락 기타
 # from synth_rock import add_rock_synth_track  # 🎹 락 신디사이저
 
 # ✅ MIDI 저장 경로
@@ -36,11 +36,11 @@ def generate_rock_backing_track(chord_progression, bpm=140, filename="rock_test.
     print("🥁 Adding Rock Drum Track...")
     add_rock_drum_track(midi, start_time, chord_duration, len(chord_progression))
 
-    # # ✅ 2. 기타 트랙 추가
-    # print("🎸 Adding Rock Guitar Track...")
-    # add_rock_guitar_track(midi, start_time, chord_duration, chord_progression)
-    #
-    # # ✅ 3. 신디사이저 트랙 추가 (선택사항)
+    # ✅ 2. 기타 트랙 추가
+    print("🎸 Adding Rock Guitar Track...")
+    add_rock_guitar_track(midi, start_time, chord_duration, chord_progression)
+
+    # ✅ 3. 신디사이저 트랙 추가 (선택사항)
     # print("🎹 Adding Rock Synth Track...")
     # add_rock_synth_track(midi, start_time, chord_duration, chord_progression)
     #
