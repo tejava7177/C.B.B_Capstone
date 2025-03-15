@@ -9,7 +9,7 @@ X = np.load(os.path.join(dataset_dir, "X.npy"))
 y = np.load(os.path.join(dataset_dir, "y.npy"))
 
 # ✅ 하이퍼파라미터 설정
-sequence_length = 10
+sequence_length = 64
 d_model = 256
 num_heads = 16
 dff = 1024
