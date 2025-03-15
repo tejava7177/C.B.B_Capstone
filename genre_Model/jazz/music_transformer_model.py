@@ -2,6 +2,7 @@ from distutils.command.config import config
 import os
 import tensorflow as tf
 from tensorflow.keras.layers import Embedding, Dense, LayerNormalization, Dropout
+from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.models import Model
 import numpy as np
 
@@ -13,7 +14,7 @@ class PositionalEncoding(tf.keras.layers.Layer):
         self.d_model = d_model
 
     def get_angles(self, pos, i):
-        angle_rates = 1 / np.power(10000, (2 * (i // 2)) / np.float32(self.d_model))
+        angle_rates = 1 / np.power(10000, (i / self.d_model))
         return pos * angle_rates
 
     def call(self, inputs):
@@ -84,6 +85,7 @@ class TransformerBlock(tf.keras.layers.Layer):
 
         self.layernorm1 = LayerNormalization(epsilon=1e-6)
         self.layernorm2 = LayerNormalization(epsilon=1e-6)
+        self.batchnorm = BatchNormalization()
         self.dropout1 = Dropout(dropout_rate)
         self.dropout2 = Dropout(dropout_rate)
 
@@ -93,14 +95,16 @@ class TransformerBlock(tf.keras.layers.Layer):
         out1 = self.layernorm1(inputs + attn_output)
 
         ffn_output = self.ffn(out1)
+        ffn_output = self.batchnorm(ffn_output)
         ffn_output = self.dropout2(ffn_output)
+
         out2 = self.layernorm2(out1 + ffn_output)
 
         return out2
 
 
 class MusicTransformer(Model):
-    def __init__(self, sequence_length, d_model, num_heads, dff, num_layers, vocab_size, dropout_rate=0.1, **kwargs):
+    def __init__(self, sequence_length, d_model, num_heads, dff, num_layers, vocab_size, dropout_rate=0.2, **kwargs):
         super(MusicTransformer, self).__init__(**kwargs)
         self.embedding = Embedding(vocab_size, d_model)
         self.pos_encoding = PositionalEncoding(sequence_length, d_model)
