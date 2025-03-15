@@ -49,51 +49,83 @@ def generate_jazz_midi(model, chord_progression, output_length=50):
     # 🎵 MIDI 파일 생성
     midi = pretty_midi.PrettyMIDI()
 
-    # 🎹 피아노 코드 진행
-    piano = pretty_midi.Instrument(program=0)
+    # 🎹 피아노 코드 트랙 (재즈적인 보이싱 & 리듬 추가)
+    piano = pretty_midi.Instrument(program=0)  # Acoustic Grand Piano
+
     start_time = 0
-    for note in generated_chords:
-        midi_note = pretty_midi.Note(velocity=100, pitch=note, start=start_time, end=start_time + 0.5)
-        piano.notes.append(midi_note)
-        start_time += 0.5
+    for chord in chord_progression:
+        if chord in CHORD_TO_NOTES:
+            root = CHORD_TO_NOTES[chord][0]  # 루트음
+            third = CHORD_TO_NOTES[chord][1]  # 3rd
+            fifth = CHORD_TO_NOTES[chord][2]  # 5th
+
+            # 🔥 텐션 코드 추가 (재즈적인 사운드 강화)
+            seventh = root + 10 if root + 10 <= 80 else root + 7
+            ninth = root + 14 if root + 14 <= 84 else root + 12
+
+            # ✅ 재즈 보이싱 구성 (Open Voicing & Tension)
+            jazz_chord = [root, third, seventh, ninth]
+
+            # 🎵 스윙 리듬 적용 (8분음표 & 16분음표 조합)
+            for i, note in enumerate(jazz_chord):
+                velocity = random.randint(70, 110)  # 연주 강도 랜덤화
+                note_length = 0.5 if i % 2 == 0 else 0.25  # 일부 음은 짧게 처리
+
+                # 🎶 음이 너무 높거나 낮으면 자동 조정
+                note = max(48, min(note, 84))
+
+                midi_note = pretty_midi.Note(velocity=velocity, pitch=note, start=start_time,
+                                             end=start_time + note_length)
+                piano.notes.append(midi_note)
+                start_time += note_length  # 리듬 패턴 반영
+
+    # 🎹 피아노 트랙 추가
     midi.instruments.append(piano)
 
-    # 🎸 더블 베이스 트랙 (Contrabass 느낌 강화)
-    bass = pretty_midi.Instrument(program=32)  # Acoustic Bass (Contrabass)
+    # 🎸 Electric Bass (finger) 트랙 (데이터셋 기반 + 랜덤 연주)
+    bass = pretty_midi.Instrument(program=33)  # Electric Bass (finger)
 
     start_time = 0
     for i, chord in enumerate(chord_progression):
         if chord in CHORD_TO_NOTES:
-            root = CHORD_TO_NOTES[chord][0]  # 코드 루트음
+            root = CHORD_TO_NOTES[chord][0]  # 루트음
             third = CHORD_TO_NOTES[chord][1]  # 3rd
             fifth = CHORD_TO_NOTES[chord][2]  # 5th
             octave = root + 12 if root + 12 <= 62 else root  # 한 옥타브 위 추가
 
-            # 🎶 베이스 진행 패턴 (루트 - 3rd - 5th - 옥타브)
-            bass_notes = [root, third, fifth, octave]
+            # ✅ 데이터셋 기반 음역대 및 벨로시티 설정
+            dataset_bass_range = (30, 50)  # 데이터셋에서 일반적으로 사용되는 음역대
+            dataset_velocity_range = (60, 110)  # 데이터셋에서 사용된 벨로시티 범위
 
-            # 🔥 크로매틱 접근음 추가 (슬라이드 효과)
+            # 🎶 베이스 진행 패턴 (루트 → 3rd → 5th → 옥타브)
+            bass_notes = [root, third, fifth, octave]  # 🔥 문제 해결: 실제 코드 진행 반영!
+
+            # 🔥 크로매틱 접근음 추가 (다음 코드 루트로 반음 접근)
             if i < len(chord_progression) - 1:
                 next_root = CHORD_TO_NOTES[chord_progression[i + 1]][0] if chord_progression[
                                                                                i + 1] in CHORD_TO_NOTES else root
-                approach_note = next_root - 1 if next_root - 1 >= 28 else next_root + 1  # 반음 접근음
+                approach_note = next_root - 1 if next_root - 1 >= dataset_bass_range[0] else next_root + 1  # 반음 접근음 추가
                 bass_notes.append(approach_note)
 
-            # 🎵 8분음표 기반 리듬 + Velocity 랜덤화 (연주 느낌 강화)
-            for j, note in enumerate(bass_notes):
-                # ✅ 베이스 음역대 조정 (너무 높거나 낮으면 자동 수정)
-                note = max(28, min(note, 62))
+            # 🎵 리듬 패턴 설정 (8분, 16분 혼합 + 스타카토 느낌 적용)
+            note_lengths = [0.5, 0.25, 0.75]  # 8분 & 16분 혼합 리듬
+            for j in range(len(bass_notes)):  # 🔥 문제 해결: 실제 bass_notes 리스트의 모든 노트 사용
+                note = bass_notes[j]  # ✅ 리스트에서 순차적으로 가져오기
 
-                # ✅ Velocity 랜덤화 (사람 연주 느낌 반영)
-                velocity = random.randint(60, 100)
+                # ✅ 음역대 조정 (데이터셋 범위 내에서 유지)
+                note = max(dataset_bass_range[0], min(note, dataset_bass_range[1]))
 
-                # 🎼 리듬 변형 (규칙적이지 않은 리듬 적용)
-                note_length = 0.5 if j % 2 == 0 else 0.25  # 일부 음은 짧게 처리
+                # ✅ Velocity 조정 (데이터셋 범위 기반)
+                velocity = random.randint(dataset_velocity_range[0], dataset_velocity_range[1])
+
+                # 🎼 리듬 변형 (랜덤 길이 적용)
+                note_length = random.choice(note_lengths)
 
                 midi_note = pretty_midi.Note(velocity=velocity, pitch=note, start=start_time,
                                              end=start_time + note_length)
                 bass.notes.append(midi_note)
-                start_time += note_length  # 8분~16분 음표 기반 진행
+
+                start_time += note_length  # ✅ 다음 노트로 이동 (연속적인 진행 보장)
 
     # 🎸 베이스 트랙 추가
     midi.instruments.append(bass)
