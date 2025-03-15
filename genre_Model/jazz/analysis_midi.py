@@ -36,7 +36,7 @@ def analyze_midi(file_path):
         print(f"❌ 오류 발생: {e}")
 
 # 📌 분석할 MIDI 파일 경로
-midi_file_path = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/genre_Model/jazz/midi/generated_jazz_enhanced.mid"
+midi_file_path = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/genre_Model/jazz/generated_jazz.mid"
 
 # 🧐 MIDI 파일 분석 실행
 analyze_midi(midi_file_path)
