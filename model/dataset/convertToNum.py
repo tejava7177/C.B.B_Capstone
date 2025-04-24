@@ -1,23 +1,39 @@
+# 📄 File: model/dataset/build_XY.py
+
 import numpy as np
-import json
+from tensorflow.keras.utils import to_categorical
+import os
 
-# 코드 매핑 로드
-with open("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/midi_chord_data.json", "r") as f:
-    midi_chord_data = json.load(f)
+# ✅ 경로 설정
+base_dir = "model/dataset"
+chord_sequences_path = os.path.join(base_dir, "chord_sequences.npy")
+chord_to_index_path = os.path.join(base_dir, "chord_to_index.npy")
 
-# 고유 코드 리스트 생성
-unique_chords = sorted(set(chord for entry in midi_chord_data for chord in entry["chords"]))
+# ✅ 데이터 로드
+chord_sequences = np.load(chord_sequences_path, allow_pickle=True)
+chord_to_index = np.load(chord_to_index_path, allow_pickle=True).item()
 
-# 코드 -> 숫자 매핑
-chord_to_index = {chord: i for i, chord in enumerate(unique_chords)}
-index_to_chord = {i: chord for chord, i in chord_to_index.items()}
+SEQUENCE_LENGTH = 4
+NUM_CLASSES = len(chord_to_index)
 
-# 코드 진행을 숫자로 변환
-chord_sequences = [[chord_to_index[chord] for chord in entry["chords"]] for entry in midi_chord_data]
+# ✅ X, Y 데이터 생성
+X, Y = [], []
 
-# 변환된 데이터 저장
-np.save("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_sequences.npy", np.array(chord_sequences, dtype=object))
-np.save("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy", chord_to_index)
+for seq in chord_sequences:
+    for i in range(len(seq) - SEQUENCE_LENGTH):
+        X.append(seq[i:i+SEQUENCE_LENGTH])
+        Y.append(seq[i+SEQUENCE_LENGTH])
 
-print(f"✅ 코드 진행 데이터를 숫자로 변환 완료! (총 {len(chord_sequences)}개)")
-print(f"🎵 고유 코드 개수: {len(chord_to_index)}개")
+X = np.array(X)
+Y = np.array(Y)
+
+# ✅ One-Hot Encoding 적용
+Y = to_categorical(Y, num_classes=NUM_CLASSES)
+
+# ✅ 저장
+np.save(os.path.join(base_dir, "X.npy"), X)
+np.save(os.path.join(base_dir, "Y.npy"), Y)
+
+print(f"✅ X, Y 데이터 저장 완료!")
+print(f"🔹 X.shape = {X.shape}")
+print(f"🔹 Y.shape = {Y.shape}")

@@ -3,15 +3,15 @@ import tensorflow as tf
 import re
 
 # ✅ 모델 로드
-model_path = "/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/training/lstm_chord_model4.h5"
+model_path = "/Users/simjuheun/Desktop/myProject/C.B.B/model/training/lstm_chord_model4.h5"
 model = tf.keras.models.load_model(model_path)
 
 # ✅ 코드 매핑 로드
-chord_to_index = np.load("/Users/simjuheun/Desktop/개인프로젝트/C.B.B/model/dataset/chord_to_index.npy",
+chord_to_index = np.load("/Users/simjuheun/Desktop/myProject/C.B.B/model/dataset/chord_to_index.npy",
                          allow_pickle=True).item()
-index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매핑
+index_to_chord = {v: k for k, v in chord_to_index.items()}  # 역매
+# 🎯 AI 예측 설정핑
 
-# 🎯 AI 예측 설정
 SEQUENCE_LENGTH = 4
 NUM_FEATURES = len(chord_to_index)  # One-hot Encoding을 위한 feature 수
 TEMPERATURE = 1.2  # 🔥 Temperature Sampling 적용

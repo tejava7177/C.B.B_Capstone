@@ -1,0 +1,54 @@
+# 📄 File: .gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code / PyCharm
+.vscode/
+.idea/
+
+# Mac OS
+.DS_Store
+
+# Environment
+.env
+.venv
+venv/
+ENV/
+env.bak/
+
+# Python virtual environments
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Logs and outputs
+*.log
+*.out
+
+# Model outputs
+*.h5
+*.npy
+*.npz
+
+# Data
+model/dataset/X.npy
+model/dataset/Y.npy
+model/dataset/chord_to_index.npy
+model/dataset/chord_sequences.npy
+
+# Music outputs
+output/
+
+# Cache
+.cache/
+__pycache__/
+
+# Ignore notebooks (optional)
+*.ipynb

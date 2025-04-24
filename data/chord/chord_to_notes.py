@@ -88,7 +88,7 @@ CHORD_TO_NOTES = {
     "Gdim": [67, 70, 73],  # G - Bb - Db
 
     # Augmented Chords
-"Aaug": [69, 73, 77],  # A - C# - E#
+    "Aaug": [69, 73, 77],  # A - C# - E#
     "Baug": [71, 75, 79],  # B - D# - G
     "Caug": [60, 64, 68],  # C - E - G#
     "Daug": [62, 66, 70],  # D - F# - A#

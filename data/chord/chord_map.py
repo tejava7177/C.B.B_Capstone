@@ -5,22 +5,22 @@
 
 CHORD_MAP = {
     # Major Triads (메이저 코드)
-    (0, 4, 7): "C Major",
-    (2, 6, 9): "D Major",
-    (4, 8, 11): "E Major",
-    (5, 9, 0): "F Major",
-    (7, 11, 2): "G Major",
-    (9, 1, 4): "A Major",
-    (11, 3, 6): "B Major",
+    (0, 4, 7): "CMajor",
+    (2, 6, 9): "DMajor",
+    (4, 8, 11): "EMajor",
+    (5, 9, 0): "FMajor",
+    (7, 11, 2): "GMajor",
+    (9, 1, 4): "AMajor",
+    (11, 3, 6): "BMajor",
 
     # Minor Triads (마이너 코드)
-    (0, 3, 7): "C Minor",
-    (2, 5, 9): "D Minor",
-    (4, 7, 11): "E Minor",
-    (5, 8, 0): "F Minor",
-    (7, 10, 2): "G Minor",
-    (9, 0, 3): "A Minor",
-    (11, 2, 5): "B Minor",
+    (0, 3, 7): "CMinor",
+    (2, 5, 9): "DMinor",
+    (4, 7, 11): "EMinor",
+    (5, 8, 0): "FMinor",
+    (7, 10, 2): "GMinor",
+    (9, 0, 3): "AMinor",
+    (11, 2, 5): "BMinor",
 
     # Seventh Chords (7 코드)
     (0, 4, 7, 10): "C7",
